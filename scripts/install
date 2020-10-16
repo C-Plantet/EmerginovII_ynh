@@ -146,16 +146,14 @@ ynh_script_progression --message="Configuring php-fpm..." --weight=2
 # Create a dedicated php-fpm config
 ynh_add_fpm_config --usage=low --footprint=low
 
+
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
 ynh_print_info --message="Installing dependencies..."
 
-ynh_install_nodejs --nodejs_version="8.16.1"
+ynh_install_nodejs --nodejs_version="8.10.0"
 ynh_use_nodejs
-
-ynh_install_app_dependencies $pkg_dependencies
-
 
 #=================================================
 # GENERIC FINALIZATION

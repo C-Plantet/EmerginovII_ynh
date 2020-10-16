@@ -1,6 +1,6 @@
 {
-    "id": "my_webapp",
-    "name": "Custom Webapp",
+    "id": "my_webapp_node",
+    "name": "Emerginov2",
     "packaging_format": 1,
     "description": {
         "en": "Custom Web app with SFTP access",
@@ -13,17 +13,13 @@
         "name": "None...",
         "email": ""
     },
-    "previous_maintainers": [{
-        "name": "Maniack Crudelis",
-        "email": "maniackc_dev@crudelis.fr"
-    }],
     "requirements": {
         "yunohost": ">= 3.8.0"
     },
     "multi_instance": true,
     "services": [
         "nginx",
-        "php7.0-fpm",
+        "nodejs",
         "mysql"
     ],
     "arguments": {
