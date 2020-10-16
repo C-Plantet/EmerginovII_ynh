@@ -1,5 +1,5 @@
 {
-    "id": "my_webapp_node",
+    "id": "my_webapp",
     "name": "Custom Webapp",
     "packaging_format": 1,
     "description": {
@@ -24,7 +24,8 @@
     "services": [
         "nginx",
         "php7.0-fpm",
-        "mysql"
+        "mysql",
+	"nodejs"
     ],
     "arguments": {
         "install" : [
