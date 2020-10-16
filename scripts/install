@@ -135,7 +135,6 @@ mkdir -p "$final_path/www"
 
     # Copy files to the right place
     cp -r "../sources/www/" "$final_path/www/"
-else
 
 
 #=================================================
