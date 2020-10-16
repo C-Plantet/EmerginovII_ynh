@@ -128,14 +128,6 @@ then
 fi
 
 #=================================================
-# STORE THE CONFIG FILE CHECKSUM
-#=================================================
-ynh_print_info --message="Storing the config file checksum..."
-
-# Calculate and store the config file checksum into the app settings
-ynh_store_file_checksum --file="$config_file"
-
-#=================================================
 # GENERIC FINALIZATION
 #=================================================
 # SECURE FILES AND DIRECTORIES
