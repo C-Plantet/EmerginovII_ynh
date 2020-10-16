@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="icon" href="./assets/Emerginov.ico" />
+      <!-- 2 load the theme CSS file -->
+      <link rel="stylesheet" href="plugin/codemirror/addon/display/fullscreen.css">
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+      <title></title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="plugin/codemirror/lib/codemirror.js"></script>
+      <!--<script src="plugin/Codemirror/addon/comment/comment.js"></script>
+      <script src="plugin/Codemirror/addon/display/fullscreen.js"></script>-->
+      <script src="plugin/codemirror/addon/hint/show-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/anyword-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/html-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/javascript-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/css-hint.js"></script>
+      <link rel="stylesheet" href="plugin/codemirror/addon/hint/show-hint.css"/>
+      <link rel="stylesheet" href="plugin/codemirror/lib/codemirror.css"/>
+      <script src="plugin/codemirror/mode/xml/xml.js"></script>
+      <script src="plugin/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+      <script src="plugin/codemirror/mode/php/php.js"></script>
+      <script src="plugin/codemirror/mode/clike/clike.js"></script>
+      <script src="plugin/codemirror/mode/javascript/javascript.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+      <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+      <link rel="stylesheet" href="plugin/codemirror/theme/dracula.css"/>
+      <link rel="stylesheet" href="plugin/codemirror/theme/blackboard.css"/>
+      <link rel="stylesheet" href="plugin/codemirror/theme/xq-dark.css"/>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+
+  </head>
+  <style>
+  .profile-header {
+      transform: translateY(5rem);
+  }
+    body {background:  	#505050;}
+    body {
+        background: #654ea3;
+        background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
+        background: linear-gradient(to right, #654ea3, #eaafc8);
+        min-height: 100vh;
+    }
+    @import "https://fonts.googleapis.com/css?family=Raleway";
+  * { box-sizing: border-box; }
+
+  h1{ margin: 0; }
+
+
+
+  #contactForm {
+    display: none;
+
+    border: 6px solid salmon;
+    padding: 2em;
+    width: 700px;
+    height: 800px;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%)
+
+  }
+
+  input, textarea {
+    margin: .8em auto;
+    font-family: inherit;
+    text-transform: inherit;
+    font-size: inherit;
+
+    display: block;
+    width: 280px;
+    padding: .4em;
+  }
+  textarea { height: 80px; resize: none; }
+
+  .formBtn {
+    width: 140px;
+    display: inline-block;
+
+    background: teal;
+    color: #fff;
+    font-weight: 100;
+    font-size: 1.2em;
+    border: none;
+    height: 30px;
+  }
+
+
+
+  </style>
+  <body>
+    <div class="bd-example">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a id="titre" class="navbar-brand" href="#">
+    <img src="./assets/Emerginov.png" width="30" height="30" alt="logo">
+    Emerginov Editor
+    </a>
+
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="http://localhost:3000/">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="form-inline my-2 my-lg-0" >
+          <li  id="alertSearch" class="nav-item">
+            <a class="alert alert-danger"  role="alert"> Sorry, this user does not exist.
+            </a>
+          </li>
+         <input onkeypress="pressEnter(event)" id="search" list="livesearch" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="showResult(this.value)" >
+
+         <datalist id="livesearch">
+         </datalist>
+         <button onclick="gotoProfile()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <div  class="collapse navbar-collapse" id="navbar-list-4">
+      <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img id="LogoutImage" width="40" height="40" class="rounded-circle">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Database</a>
+            <a class="dropdown-item" href="#" onclick="editProfile()">Edit Profile</a>
+            <a class="dropdown-item" href="#" onclick="logout()">Log Out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ul>
+      <!--  <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>-->
+
+      </div>
+    </nav>
+    </div>
+
+  <div class="row py-5 px-4">
+      <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
+
+          <!-- Profile widget -->
+          <div class="bg-white shadow rounded overflow-hidden">
+              <div class="px-4 pt-0 pb-4 bg-dark">
+                  <div class="media align-items-end profile-header">
+                      <div  class="profile mr-3"><img id="photo" alt="..." width="130" class="rounded mb-2 img-thumbnail"><button id="follow"    >Follow</button></div>
+                      <div class="media-body mb-5 text-white">
+                          <h4 id="name" class="mt-0 mb-0"></h4>
+                          <p id="location"class="small mb-4"> <i class="fa fa-map-marker mr-2"></i></p>
+                      </div>
+
+                  </div>
+
+              </div>
+
+              <div class="bg-light p-4 d-flex justify-content-end text-center">
+                  <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                          <h5 id="Job" class="font-weight-bold mb-0 d-block"></h5><small id="SchoolOrwork" class="text-muted"> <i class="fa fa-briefcase" ></i> </small>
+                      </li>
+                      <li class="list-inline-item">
+                          <h5 id="nbfollowers" class="font-weight-bold mb-0 d-block"></h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>
+                      </li>
+                  </ul>
+              </div>
+
+              <div class="py-4 px-4">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                      <h5 class="mb-0">Recent photos</h5><a href="#" class="btn btn-link text-muted">Show all</a>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6 mb-2 pr-lg-1"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556294928/nicole-honeywill-546848-unsplash_ymprvp.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                      <div class="col-lg-6 mb-2 pl-lg-1"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
+                      </div>
+                  <div class="py-4">
+                      <h5 class="mb-3">Recent projects</h5>
+                      <div  id="project" class="p-4 bg-light rounded shadow-sm">
+                        <!-- <div  class="profile mr-3"><img id="photo" alt="..." width="130" class="rounded mb-2 img-thumbnail"><button id="follow"   href=""  class="btn btn-danger btn-sm btn-block">Follow</button></div> -->
+
+
+                      </div>
+
+                  </div>
+              </div>
+          </div><!-- End profile widget -->
+
+      </div>
+  </div>
+
+
+  <div id="contactForm">
+
+    <h1>Keep in touch!</h1>
+    <small>I'll get back to you as quickly as possible</small>
+
+    <form action="#">
+      <input placeholder="Name" type="text" required />
+      <input placeholder="Email" type="email" required />
+      <input placeholder="Subject" type="text" required />
+      <textarea placeholder="Comment"></textarea>
+      <input class="formBtn" type="submit" />
+      <input class="formBtn" type="reset" />
+    </form>
+  </div>
+  </body>
+  <script>
+  var projectName=""
+  var tableOfProfiles=[];
+  $("#alertSearch").hide()
+  if (sessionStorage.getItem("userID")==null) {
+    document.location.href = `http://localhost:3000/login.html`
+
+  }
+  var url=window.location.href;
+  var idOfUser = url.substring(url.lastIndexOf('D') + 2);
+
+  id=parseInt(idOfUser)
+  console.log("l'id est : "+id);
+  function pressEnter() {
+     var code=event.which || event.keyCode; //Selon le navigateur c'est which ou keyCode
+     if (code==13) { //le code de la touche Enter
+        console.log("pressed");
+        gotoProfile();
+    }
+  }
+
+  $.ajax({
+      async: true,
+      type: "POST",
+      url: "http://localhost:3000/api/users/id",
+      dataType:"json",
+      data: {
+          "id":id
+      },
+      success: function (json) {
+
+        window.parent.document.title = json.name
+        document.getElementById("name").innerHTML=json.name
+        document.getElementById("location").innerHTML+=json.location
+        document.getElementById("Job").innerHTML+=json.job
+        console.log(json.projectid);
+        if (json.projectid!=null) {
+        for (var i = 0; i < json.projectid.length; i++) {
+
+          $.ajax({
+            async: true,
+            type: "POST",
+            url: "http://localhost:3000/api/projects/id",
+            dataType:"json",
+            data: {
+                "id":json.projectid[i]
+            },
+            success: function (json) {
+              console.log(json);
+              if (json.id!=undefined) {
+                var url=window.location.href;
+                var idOfUser = url.substring(url.lastIndexOf('D') + 2);
+                id=parseInt(idOfUser)
+                var  buttonid=  Math.floor(Math.random() * 1000);
+                var  textid=  Math.floor(Math.random() * 1000);
+                console.log(buttonid);    // returns a random integer from 0 to 99
+                var projectName=json.name
+                console.log(projectName);
+                buttonid=buttonid.toString()
+
+                $('#project').append(`<p id="${textid}" class="font-italic mb-0"><button  id="${buttonid}" onclick="send_Req(this.id,${textid})"></button> ${json.name}</p><br>`);
+
+                var myID=sessionStorage.getItem("userID")
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    url: "http://localhost:3000/api/projects/verifyRequest",
+                    dataType:"json",
+                    data: {
+                        "projectName":projectName,
+                        "myID":myID,
+                        "profileID":id
+                    },
+                    success: function (json) {
+                      console.log(json);
+                      if (json.verification=="yes") {
+                        console.log(json.status);
+                        if (json.status=="waitForResponse") {
+                          $(`#${buttonid}`).addClass("btn btn-info btn-sm")
+                          $( `#${buttonid}` ).prop( "disabled", true );
+                          $( `#${buttonid}` ).text("waiting for approuvement");
+
+                        }else if(json.status=="approved"){
+                          $(`#${buttonid}`).addClass("btn btn-success btn-sm fa fa-check")
+                          $( `#${buttonid}` ).prop( "disabled", true );
+                          $( `#${buttonid}` ).text(" approved");
+
+                        }else {
+
+                        }
+                        console.log("yes");
+                        //fa fa check vert for approuvement
+
+
+                      }else {
+                        console.log("no");
+                        $(`#${buttonid}`).addClass("btn btn-success btn-sm fa fa-plus")
+
+
+                      }
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                    }
+                });
+
+               }else {}
+
+              //mettre l'id dans l'url
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+            }
+        });
+
+      }
+    }else {
+
+    }
+        console.log(json);
+        if (json.picture==undefined) {
+          document.getElementById('photo').src="./assets/unknown.jpg"
+
+        }else {
+          document.getElementById('photo').src="data:image/png;base64," + json.picture
+
+        }
+
+        if (json.company!=undefined) {
+          console.log("hey");
+          document.getElementById("SchoolOrwork").innerHTML+=json.company
+
+        }else {
+          document.getElementById("SchoolOrwork").innerHTML+=json.school
+
+        }
+
+        var nbfollowers=json.nbfollowers
+        if(nbfollowers>=1000000){
+          nbfollowers=(nbfollowers/1000000).toFixed(1)+"M"
+          document.getElementById("nbfollowers").innerHTML+=nbfollowers
+
+        }
+        else if(nbfollowers>=1000){
+          nbfollowers=(nbfollowers/1000).toFixed(1)+"K";
+          document.getElementById("nbfollowers").innerHTML+=nbfollowers
+
+        }else {
+          document.getElementById("nbfollowers").innerHTML+=nbfollowers
+        }
+
+
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+      }
+  });
+
+  function send_Req(e,n){
+
+    var ProjectName=document.getElementById(n).innerText.replace(" ","");
+    console.log(ProjectName);
+    var url=window.location.href;
+    var idOfUser = url.substring(url.lastIndexOf('D') + 2);
+    id=parseInt(idOfUser)
+    var myID=sessionStorage.getItem("userID")
+    // ProjectName.splice(ProjectName.indexOf(""), 1);
+    // ProjectName=ProjectName.replace(" ","");
+    // console.log(ProjectName);
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/projects/name",
+        dataType:"json",
+        data: {
+            "name":ProjectName
+        },
+        success: function (json) {
+          var projectID=json.id
+          $.ajax({
+              async: true,
+              type: "POST",
+              url: "http://localhost:3000/api/projects/sendReq",
+              dataType:"json",
+              data: {
+                  "projectName":json.name,
+                  "myID":myID,
+                  "profileID":id
+              },
+              success: function (json) {
+
+
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+              }
+          });
+          // console.log(document.getElementById("projects"));
+          // var ids = $('#projects ').children().map(function(){
+          //   return $(this).attr('id');
+          // }).get();
+
+
+          $(`#${e}`).toggleClass("btn btn-success btn-sm fa fa-plus")
+          $(`#${e}`).addClass("btn btn-info btn-sm")
+
+          $(`#${e}`).text(" waiting for approuvement");
+          $(`#${e}`).prop( "disabled", true );
+
+
+
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+  }
+
+
+
+  function gotoProfile(){
+    var login=document.getElementById("search").value;
+    console.log(login);
+    if (login!="") {
+      $.ajax({
+          async: true,
+          type: "POST",
+          url: "http://localhost:3000/api/users/login",
+          dataType:"json",
+          data: {
+              "login":login
+          },
+          success: function (json) {
+            console.log(json);
+            if (json.id!=undefined) {
+              console.log(json.id);
+              $("#alertSearch").hide()
+              var id=json.id;
+              var myID=sessionStorage.getItem("userID")
+              if (BigInt(id)==BigInt(myID)) {
+                document.location.href = `http://localhost:3000/editProfile.html`
+
+              }else {
+                document.location.href = `http://localhost:3000/profile.html?ProfileID=${id}`
+
+              }
+
+            }else {
+              $("#alertSearch").show()
+            }
+
+            //mettre l'id dans l'url
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+          }
+      });
+
+    }
+
+
+  }
+  var id=sessionStorage.getItem("userID")
+  console.log(id);
+  $.ajax({
+      async: true,
+      type: "POST",
+      url: "http://localhost:3000/api/users/id",
+      data: {
+        "id":id
+      },
+      success: function (json) {
+        console.log(json.picture);
+        if (json.picture==null) {
+          $("#LogoutImage").attr('src',"./assets/unknown.jpg");
+
+
+        }else {
+          let profilephoto=`data:image/png;base64,${json.picture}`
+          $("#LogoutImage").attr('src',profilephoto);
+
+        }
+
+          //  document.getElementById('chatBox').srcdoc+="<br>"+value;
+        },
+        // response=json.msg3+"\n"+json.msg2+"\n"+json.msg1+"\n"+json.msg0;
+        // document.getElementById('chatBox').srcdoc+=response;
+      error: function (xhr, ajaxOptions, thrownError) {
+          alert(thrownError);
+      }
+
+  });
+
+  function editProfile(){
+    var sessionkey=sessionStorage.getItem("userID")
+    if (sessionkey=="") {
+      document.location.href = `http://localhost:3000/login.html`
+
+    }else {
+      document.location.href = `http://localhost:3000/editProfile.html?id=${sessionkey}`
+
+    }
+
+
+  }
+  function logout(){
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/verifyCommit",
+        dataType:"json",
+        data:{
+          "id":sessionStorage.getItem("userID")
+        },
+        success: function (json) {
+
+          if (json.message!=null) {
+            console.log(json.message);
+            if (json.message=="no projects") {
+
+              setTimeout(function(){
+                var sessionkey=sessionStorage.removeItem("userID")
+                document.location.href = `http://localhost:3000/login.html`
+
+              },100)
+
+
+
+            }else if(json.message!="no problem"){
+              console.log(json);
+              if (json.message.length!=0) {
+
+
+              Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                html: `
+                       Projects not commited:
+                       <li>${json.message}</li>
+                     ` ,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete changes!'
+              }).then((result) => {
+                if (result.value) {
+                   $.ajax({
+                       async: true,
+                       type: "POST",
+                       url: "http://localhost:3000/api/users/logout",
+                       dataType:"json",
+                       data:{
+                         "id":sessionStorage.getItem("userID")
+                       },
+                       success: function (json) {
+                         if (json.message=="deleted") {
+                           Swal.fire(
+                             'Changes deleted!',
+                             'Your changes have been deleted.',
+                             'success'
+
+                           ).then((result)=>{
+                             if (result.value) {
+                               setTimeout(function(){
+                                 var sessionkey=sessionStorage.removeItem("userID")
+                                 document.location.href = `http://localhost:3000/login.html`
+
+                               },100)
+
+                             }
+                           })
+                         }
+
+                       },
+                       error: function (xhr, ajaxOptions, thrownError) {
+                       }
+                   });
+
+
+                 }
+                })
+              }else {
+                Swal.fire({
+                  title: 'Are you sure ?',
+                  text: 'For your project, we created a start src directory, we recommand you to push it before leaving',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Later'
+                }).then((result) => {
+                  if (result.value) {
+                     $.ajax({
+                         async: true,
+                         type: "POST",
+                         url: "http://localhost:3000/api/users/logout",
+                         dataType:"json",
+                         data:{
+                           "id":sessionStorage.getItem("userID")
+                         },
+                         success: function (json) {
+
+                                   var sessionkey=sessionStorage.removeItem("userID")
+                                   document.location.href = `http://localhost:3000/login.html`
+
+
+
+
+
+
+
+                         },
+                         error: function (xhr, ajaxOptions, thrownError) {
+                         }
+                     });
+
+
+                   }
+                  })
+              }
+            }else {
+            setTimeout(function(){  $.ajax({
+                  async: true,
+                  type: "POST",
+                  url: "http://localhost:3000/api/users/logout",
+                  dataType:"json",
+                  data:{
+                    "id":sessionStorage.getItem("userID")
+                  },
+                  success: function (json) {
+                    console.log("heloooo");
+                    setTimeout(function(){
+                      var sessionkey=sessionStorage.removeItem("userID")
+                      document.location.href = `http://localhost:3000/login.html`
+
+                    },100)
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                  }
+              });
+            },200)
+
+                        // var sessionkey=sessionStorage.removeItem("userID")
+                        // document.location.href = `http://localhost:3000/login.html`
+            }
+
+          }else {
+            console.log(json);
+
+            var sessionkey=sessionStorage.removeItem("userID")
+            document.location.href = `http://localhost:3000/login.html`
+
+          }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+
+  }
+
+  function showResult(str) {
+    console.log(str);
+
+
+    if (str!="") {
+      $.ajax({
+          async: true,
+          type: "POST",
+          url: "http://localhost:3000/api/users/name",
+          dataType:"json",
+          data:{
+            "name":str
+          },
+          success: function (json) {
+               if (typeof json.message !== 'undefined') {
+                   $("datalist").prepend(`<option>${json.message}</option>`)
+               }else {
+                 console.log(json[0]);
+                 console.log(json.length);
+                 for (var i = 0; i < json.length; i++) {
+                   if (!tableOfProfiles.includes(json[i].login)) {
+                     $("datalist").prepend(`<option>${json[i].login}</option>`)
+                     tableOfProfiles.push(json[i].login)
+                   }
+                 }
+
+               }
+
+
+             //  console.log(json.description);
+              // if (json.message!=NULL) {
+              //   if (json.message==" this project does nt exist ") {
+              //   }
+              // }
+              //
+
+
+           // document.getElementById("livesearch").innerHTML+=`<option>${json.message}</option>`
+
+            console.log(json);
+
+
+    }
+   });
+ }
+
+ }
+ $("#sendRequest").click(function(){
+
+  var text=$("#sendRequest").text();
+  console.log(text);
+  if (text=="send request") {
+    $("#sendRequest").removeClass("btn btn-danger btn-sm btn-block");
+    $(this).addClass("btn btn-success btn-sm btn-block");
+    $("#sendRequest").text("sent");
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/sendRequest",
+        dataType:"json",
+        data: {
+            "id":id
+        },
+        success: function (json) {
+
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+  }else {
+
+
+  }
+
+
+});
+var notmyid=window.location.href.substring(url.lastIndexOf('D') + 2);
+notmyid=parseInt(notmyid)
+console.log(notmyid);
+$.ajax({
+    async: true,
+    type: "POST",
+    url: "http://localhost:3000/api/users/checkFollower",
+    dataType:"json",
+    data: {
+        "id":notmyid,
+        "myid":sessionStorage.getItem("userID")
+          },
+    success: function (json) {
+      console.log(json);
+      if (json.check==true) {
+        $("#follow").addClass("btn btn-success btn-sm btn-block");
+        $("#follow").text("Unfollow");
+      }else {
+        $("#follow").addClass("btn btn-danger btn-sm btn-block");
+        $("#follow").text("Follow");
+      }
+
+      //mettre l'id dans l'url
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+    }
+});
+
+
+ $("#follow").click(function(){
+   let url=window.location.href;
+   let idOfUser = url.substring(url.lastIndexOf('D') + 2);
+
+    let id=parseInt(idOfUser)
+
+  var text=$("#follow").text();
+  console.log(text);
+  if (text=="Follow") {
+    $("#follow").removeClass("btn btn-danger btn-sm btn-block");
+    $("#follow").addClass("btn btn-success btn-sm btn-block");
+    $("#follow").text("Unfollow");
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/follow",
+        dataType:"json",
+        data: {
+            "id":id,
+            "myid":sessionStorage.getItem("userID")
+        },
+        success: function (json) {
+
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+  }else {
+    $("#follow").removeClass("btn btn-success btn-sm btn-block");
+    $("#follow").addClass("btn btn-danger btn-sm btn-block");
+    $("#follow").text("Follow");
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/unfollow",
+        dataType:"json",
+        data: {
+            "id":id,
+            "myid":sessionStorage.getItem("userID")
+        },
+        success: function (json) {
+
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+  }
+
+
+});
+
+
+    // contact form animations
+    // $('#follow').click(function() {
+    //   alert("request sent !");
+    // })
+    // function getUrlVars() {
+    //     var vars = {};
+    //     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    //         vars[key] = value;
+    //     });
+    //     return vars;
+    // }
+
+
+
+  </script>
+</html>

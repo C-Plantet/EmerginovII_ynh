@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<title></title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="./css/contacts.css">
+</head>
+<style>
+#subject{
+  resize: none;
+}
+</style>
+<body>
+  <div style="height: 100px;" class="p-3 mb-2 bg-info text-white font-weight-bold h1" >
+      Contacts
+  </div>
+
+  <div style="margin-left:250px; margin-top:50px"class="container">
+    <div class="tablet">
+      <div class="content">
+        <form
+         action="http://localhost:3000/mail/send"
+         method="post"
+         novalidate="true"
+        >
+
+        <!--  <input style=" border-radius: 20px;width:100%"type="text" id="fname" name="emitter" placeholder="Your email">
+-->
+          <input style=" border-radius: 20px;width:100%" type="text" id="lname" name="reciever" placeholder="His/her email">
+          <input style=" border-radius: 20px;width:100%" type="text" id="lname" name="subject" placeholder="subject">
+          <input style=" border-radius: 20px;width:100%" type="file" id="lname" name="join" placeholder="subject">
+          <label for="subject"></label>
+          <textarea id="subject" name="content" placeholder="Write something.." style=" border-radius: 20px;height:100px;width:100%"></textarea>
+          <input style="margin-left:300px ;margin-top:-20px" type="submit" value="Send">
+
+        </form>
+      </div>
+    </div>
+
+ <div class="smartphone">
+  <div class="content">
+    <form action="http://localhost:3000/sms/send"
+     method="post"
+     novalidate="true">
+
+      <input type="text" id="phoneMsg" style="width:300px; margin-top: 100px;border-radius: 20px;width:100%" name="phoneNumber" placeholder="his/her phone number">
+      <br>
+      <label for="subject"></label>
+      <textarea  id="subject" name="sms" placeholder="Write your sms.." style=" border-radius: 20px;height:200px ;width:100%"></textarea>
+      <br>
+      <input style="margin-left:110px;margin-top:30px" type="submit" value="Send">
+    </form>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <!-- En-tête de la page -->
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="icon" type="image/jpg" href="assets/Emerginov.jpg" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!--  HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <title>Accueil</title>
+
+    </head>
+<style>
+body {background:  	#505050;}
+form{
+  position: absolute;
+
+  margin-left : 700px ;
+  margin-top : -40px ;
+
+  font-family: Comic sans ms;
+}
+#app{
+  position: fixed;
+    z-index: 999;
+    height: 50%;
+    width: 30%;
+    overflow: show;
+    margin: auto;
+    top: -200px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+#app1{
+  position: fixed;
+    overflow: show;
+    margin: auto;
+    right: 0;
+}
+
+
+</style>
+
+    <body >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a id="titre" class="navbar-brand" href="#">
+      <img src="./assets/Emerginov.png" width="30" height="30" alt="logo">
+      Emerginov Editor
+      </a>
+
+        <form
+        id="app1"
+        @submit="checkLogin"
+        action="http://localhost:3000/api/users/search"
+        method="post"
+        novalidate="true"
+        class="form-inline my-2 my-lg-0">
+            <input id="login"  name="login" v-model="login"  type="text" class="form-control mr-sm-2" placeholder="Login" aria-label="Search">
+            <input  id="password" name="password" v-model="password" type="password"class="form-control mr-sm-2" type="search" placeholder="Password" aria-label="Search">
+            <button  onclick="sessionStorage()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Connexion</button>
+            <!-- <a style="color:white" href="https://example.com">I forgot my password</a> -->
+
+
+          <ul>
+            <div style=" color: gold;margin-left:-400px;margin-top:165px" v-if="errors.length">
+              <b>Please correct the following error(s):</b>
+              <ul>
+                <li v-for="error in errors">{{ error }}</li>
+              </ul>
+            </div>
+          </ul>
+
+
+        </form>
+
+
+        <!--  <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>-->
+
+      </nav>
+
+     <!-- <form
+       id="app1"
+       @submit="checkLogin"
+       action="http://localhost:3000/api/users/login"
+       method="post"
+       novalidate="true" class="form-inline">
+
+       <div style="margin-top: -60px;" class="form-group mb-2">
+         <label  for="login" class="sr-only">Login</label>
+         <input id="login"  name="login" v-model="login"  type="text" class="form-control" placeholder="login">
+      </div>
+       <div   style="margin-top: -60px;"class="form-group mx-sm-3 mb-2">
+        <label for="password" class="sr-only">Password</label>
+        <input id="password" name="password" v-model="password" type="password" class="form-control" placeholder="password">
+      </div>
+
+     <button  style="margin-top: -60px;" type="submit" class="btn btn-dark mb-2">Connexion</button>
+     <div style="margin-top: 700px;" v-if="errors.length">
+       <b>Please correct the following error(s):</b>
+       <ul>
+         <li v-for="error in errors">{{ error }}</li>
+       </ul>
+     </div>
+     </form> -->
+<br><br>
+      <form
+  id="app"
+  @submit="checkForm"
+  action="http://localhost:3000/api/users/"
+  method="post"
+  novalidate="true"
+>
+
+<br><br>
+  <div  class="row form-group">
+      <div  class="col">
+        <input  id="name" name="name" v-model="name" type="text" class="form-control" placeholder="name">
+      </div>
+      <div   class="col">
+        <input id="login1" name="login" v-model="login" type="text" class="form-control" placeholder="login">
+      </div>
+  </div>
+  <div class="form-group">
+      <input id="email"  name="email" v-model="email" type="text" class="form-control" placeholder="E-mail">
+  </div>
+
+  <div class="form-group">
+    <input id="school" v-model="school" name="school" type="text" class="form-control" id="formGroupExampleInput2" placeholder="School/Company">
+  </div>
+  <div class="form-group">
+    <input id="password" name="password" v-model="password" type="password" class="form-control" id="formGroupExampleInput2" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <input id="password2" v-model="Newpassword" type="password" class="form-control"   id="formGroupExampleInput2" placeholder=" New Password">
+  </div>
+
+    <div class="form-group">
+      <input id="location" v-model="location" type="text" class="form-control" name="location" placeholder="Location">
+    </div>
+  <div class="form-group">
+    <input id="Job" v-model="Job" type="text" class="form-control" name="job" placeholder="Job">
+  </div>
+
+  <div class="form-group">
+      <input id="gitusername"  name="gitusername" v-model="gitusername" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Git Username">
+  </div>
+  <div class="form-group">
+      <input id="gittoken"  name="gittoken" v-model="gittoken"  type="password" class="form-control" id="formGroupExampleInput2" placeholder="Git token">
+  </div>
+  <div class="form-group">
+    <input id="mastodon" v-model="mastodon" type="password" class="form-control" name="mastodon" placeholder="Mastodon token">
+  </div>
+  <button style="margin-left:130px;"type="submit" class="btn btn-outline-success btn-lg my-2 my-sm-0">Register</button>
+  <div style="margin-left:-450px; margin-top: -650px;color:gold">
+    <p v-if="errors.length">
+      <b>Please correct the following error(s):</b>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
+    </p>
+  </div>
+</form>
+
+      </form>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.0-rc.5/vue.js"></script>
+    <script src="js/app.js"></script>
+<script type="text/javascript">
+
+
+</script>
+</html>

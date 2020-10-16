@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <!-- En-tête de la page -->
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="icon" type="image/jpg" href="assets/Emerginov.jpg" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!--  HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <title>Home</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    </head>
+
+
+    <body  >
+    <div style="height: 100px;" class="p-3 mb-2 bg-info text-white font-weight-bold h1" >
+        Bienvenue
+      </div>
+
+
+<br>
+Your projects :
+<br><br><br><br>
+      <form
+id=""
+@submit="checkForm"
+class="createForm"
+  action="http://localhost:3000/repos/create"
+  method="post"
+  novalidate="true"
+>
+<br><br>
+  <div  style="margin-left:0px;"  class="p-3 mb-2 h1 font-weight-bold">Create a new project </div><br>
+
+  <div class="form-group">
+    <input id="school" v-model="school" name="name" type="text" class="form-control" id="formGroupExampleInput2" placeholder="name of repo">
+  </div>
+  <div class="form-group">
+    <input id="password" v-model="password" name="token" type="password" class="form-control" id="formGroupExampleInput2" placeholder="put your token">
+  </div>
+
+
+  <button type="submit" class="btn btn-primary btn-lg btn-block">Create</button>
+
+</form>
+
+
+<br>
+<form
+class="deleteForm"
+action="http://localhost:3000/repos/delete"
+method="post"
+novalidate="true"
+>
+
+<div   class="p-3 mb-2 h1 font-weight-bold">Delete my project </div><br>
+
+<div class="form-group">
+<input id="profession"  name="username" v-model="profession" type="text" class="form-control" id="formGroupExampleInput2" placeholder="git username">
+</div>
+<div class="form-group">
+<input id="school" v-model="school" name="name" type="text" class="form-control" id="formGroupExampleInput2" placeholder="name of repo">
+</div>
+<div class="form-group">
+<input id="password" name="token" v-model="password" type="password" class="form-control" id="formGroupExampleInput2" placeholder="put your token">
+</div>
+
+
+<button type="submit" class="btn btn-primary btn-lg btn-block">Delete my repo</button>
+
+</form>
+<div style=" margin-left:50px">
+ <h1 style="margin-top:350px;">Note :</h1> Your token can be found on your github profile : settings/developer settings/personal access tokens
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.0-rc.5/vue.js"></script>
+    <script src="js/app.js"></script>
+    <style>
+        body{
+          background-color: #D3D5D8;
+        }
+        .createForm{
+          position: absolute;
+          margin-left : 900px ;
+          margin-top : -40px ;
+
+          font-family: Comic sans ms;
+        }
+        .deleteForm{
+          position: absolute;
+          margin-left : 200px ;
+          margin-top : -40px ;
+
+          font-family: Comic sans ms;
+        }
+
+    </style>
+</html>
+<script>
+
+</script>

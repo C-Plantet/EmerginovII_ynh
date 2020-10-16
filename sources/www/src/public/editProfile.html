@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="icon" href="./assets/Emerginov.ico" />
+      <!-- 2 load the theme CSS file -->
+      <link rel="stylesheet" href="plugin/codemirror/addon/display/fullscreen.css">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+      <title></title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="plugin/codemirror/lib/codemirror.js"></script>
+      <!--<script src="plugin/Codemirror/addon/comment/comment.js"></script>
+      <script src="plugin/Codemirror/addon/display/fullscreen.js"></script>-->
+      <script src="plugin/codemirror/addon/hint/show-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/anyword-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/html-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/javascript-hint.js"></script>
+      <script src="plugin/codemirror/addon/hint/css-hint.js"></script>
+      <link rel="stylesheet" href="plugin/codemirror/addon/hint/show-hint.css"/>
+      <link rel="stylesheet" href="plugin/codemirror/lib/codemirror.css"/>
+      <script src="plugin/codemirror/mode/xml/xml.js"></script>
+      <script src="plugin/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+      <script src="plugin/codemirror/mode/php/php.js"></script>
+      <script src="plugin/codemirror/mode/clike/clike.js"></script>
+      <script src="plugin/codemirror/mode/javascript/javascript.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+      <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+      <link rel="stylesheet" href="plugin/codemirror/theme/dracula.css"/>
+      <link rel="stylesheet" href="plugin/codemirror/theme/blackboard.css"/>
+      <link rel="stylesheet" href="plugin/codemirror/theme/xq-dark.css"/>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+
+  </head>
+  <style>
+  .thumb {
+   height: 75px;
+   border: 1px solid #000;
+   margin: 10px 5px 0 0;
+ }
+  .profile-header {
+      transform: translateY(5rem);
+  }
+    body {background:  	#505050;}
+    body {
+        background: #654ea3;
+        background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
+        background: linear-gradient(to right, #654ea3, #eaafc8);
+        min-height: 100vh;
+    }
+    @import "https://fonts.googleapis.com/css?family=Raleway";
+  * { box-sizing: border-box; }
+
+  h1{ margin: 0; }
+
+
+  /* Absolute Center Spinner */
+  .loading {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  /* Transparent Overlay */
+  .loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+      background: radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0, .8));
+
+    background: -webkit-radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0,.8));
+  }
+
+  /* :not(:required) hides these rules from IE9 and below */
+  .loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 150ms infinite linear;
+    -moz-animation: spinner 150ms infinite linear;
+    -ms-animation: spinner 150ms infinite linear;
+    -o-animation: spinner 150ms infinite linear;
+    animation: spinner 150ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
+  }
+
+  /* Animation */
+
+  @-webkit-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @-moz-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  #contactForm {
+    display: none;
+
+    border: 6px solid salmon;
+    padding: 2em;
+    width: 700px;
+    height: 800px;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%)
+
+  }
+
+  input, textarea {
+    margin: .8em auto;
+    font-family: inherit;
+    text-transform: inherit;
+    font-size: inherit;
+
+    display: block;
+    width: 280px;
+    padding: .4em;
+  }
+  textarea { height: 80px; resize: none; }
+
+  .formBtn {
+    width: 140px;
+    display: inline-block;
+
+    background: teal;
+    color: #fff;
+    font-weight: 100;
+    font-size: 1.2em;
+    border: none;
+    height: 40px;
+  }
+
+
+
+  </style>
+  <body>
+    <div class="bd-example">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a id="titre" class="navbar-brand" href="#">
+    <img src="./assets/Emerginov.png" width="30" height="30" alt="logo">
+    Emerginov Editor
+    </a>
+
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="http://localhost:3000/">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="form-inline my-2 my-lg-0" >
+          <li  id="alertSearch" class="nav-item">
+            <a class="alert alert-danger"  role="alert"> Sorry, this user does not exist.
+            </a>
+          </li>
+         <input onkeypress="pressEnter(event)" id="search" list="livesearch" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="showResult(this.value)" >
+
+         <datalist id="livesearch">
+         </datalist>
+         <button onclick="gotoProfile()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <div  class="collapse navbar-collapse" id="navbar-list-4">
+      <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img id="profilephoto" width="40" height="40" class="rounded-circle">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a type="button" class="dropdown-item">Database</a>
+            <a type="button" class="dropdown-item" onclick="editProfile()">Edit Profile</a>
+            <a type="button" class="dropdown-item" onclick="logout()">Log Out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ul>
+      <!--  <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>-->
+
+      </div>
+    </nav>
+    </div>
+
+  <div class="row py-5 px-4">
+      <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
+
+          <!-- Profile widget -->
+          <div class="bg-white shadow rounded overflow-hidden">
+              <div class="px-4 pt-0 pb-4 bg-dark">
+                  <div class="media align-items-end profile-header">
+                  <div  class="profile mr-3"><img id="photo"alt="..." width="130" class="rounded mb-2 img-thumbnail"><a id="contact" href="#"class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
+                      <div class="media-body mb-5 text-white">
+                          <h4 id="name" class="mt-0 mb-0"></h4>
+                          <p id="location"class="small mb-4"> <i class="fa fa-map-marker mr-2"></i></p>
+                      </div>
+
+                  </div>
+
+              </div>
+
+              <div class="bg-light p-4 d-flex justify-content-end text-center">
+                  <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                          <h5 id="Job" class="font-weight-bold mb-0 d-block"></h5><small id="SchoolOrwork" class="text-muted"> <i class="fa fa-briefcase" ></i> </small>
+                      </li>
+                      <li class="list-inline-item">
+                          <h5 id="nbfollowers" class="font-weight-bold mb-0 d-block"></h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>
+                      </li>
+                  </ul>
+              </div>
+
+              <div class="py-4 px-4">
+
+
+                      <div class="py-4">
+                          <h5 class="mb-3">Current project</h5>
+                          <select onchange="changeCurrent()" id="currentProject" class="browser-default custom-select custom-select-lg mb-3">
+                              <option  selected>select your project</option>
+
+                        </select>
+
+                      </div>
+                  <div class="py-4">
+                      <h5 class="mb-3">Recent projects</h5>
+                      <div id="project"class="p-4 bg-light rounded shadow-sm">
+
+                      </div>
+                  </div>
+              </div>
+          </div><!-- End profile widget -->
+
+      </div>
+  </div>
+
+  <div id="load" class="loading">Loading&#8230;</div>
+  <div id="contactForm">
+
+    <h1>Update your profile</h1>
+
+      <input type="file" id="files" name="files[]"  />
+      <output id="list"></output>
+      <input placeholder="Name" type="text" required />
+      <input placeholder="Email" type="email" required />
+      <input placeholder="Subject" type="text" required />
+      <textarea placeholder="Comment"></textarea>
+      <input id="update"class="formBtn" value="Validate" type="submit" />
+  </div>
+
+
+</body>
+
+  <script>
+  $("#load").hide()
+  function changeCurrent(){
+    $("#load").show()
+    var x = document.getElementById('currentProject').value;
+    var y = document.getElementById(x).innerText;
+    console.log(y);
+    let id=parseInt(x)
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/changeCurrent",
+        dataType:"json",
+        data: {
+            "id":sessionStorage.getItem("userID"),
+            "newCurrentid":x,
+            "newCurrentname":y
+
+
+        },
+        success: function (json) {
+          $("#load").hide()
+          Swal.fire({
+            title: ' Project change succeeded successfully !',
+            text: "Thank you",
+            icon: 'success',
+          }).then((result) => {
+            if (result.value) {
+              //window.location.reload()
+            }
+          })
+          console.log("done");
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+
+  }
+  var pic;
+  function handleFileSelect(evt) {
+     var files = evt.target.files; // FileList object
+     console.log(files);
+     // Loop through the FileList and render image files as thumbnails.
+     for (var i = 0, f; f = files[i]; i++) {
+
+       // Only process image files.
+       if (!f.type.match('image.*')) {
+         continue;
+       }
+
+       var reader = new FileReader();
+
+       // Closure to capture the file information.
+       reader.onload = (function(theFile) {
+         return function(e) {
+           // Render thumbnail.
+           if (e.target.result.substring(11,13)=="jp") {
+             pic=e.target.result.replace("data:image/jpeg;base64,","");
+
+           }else {
+             pic=e.target.result.replace("data:image/png;base64,","");
+
+           }
+        //  pic=e.target.result.replace("data:image/jpg;base64,","");
+
+
+          console.log(pic);
+           var span = document.createElement('span');
+           $("#image").remove();
+           span.innerHTML = ['<img id="image" class="thumb" src="', e.target.result,
+                             '" title="', escape(theFile.name), '"/>'].join('');
+           document.getElementById('list').insertBefore(span, null);
+         };
+       })(f);
+
+       // Read in the image file as a data URL.
+       reader.readAsDataURL(f);
+     }
+
+
+
+}
+   $("#update").click(function(){
+     if (pic!="") {
+       var url=window.location.href;
+       var idOfUser = url.substring(url.lastIndexOf('=') + 1);
+       id=parseInt(idOfUser)
+       console.log("l'id est : "+id);
+      if (pic.length>30000) {
+        console.log(pic.length);
+
+      }
+
+     $.ajax({
+         async: true,
+         type: "POST",
+         url: "http://localhost:3000/api/users/picture",
+         dataType:"json",
+         data: {
+             "id":id,
+             "picture":pic
+
+
+         },
+         success: function (json) {
+
+           console.log("done");
+           Swal.fire({
+             title: 'update succeeded successfully !',
+             text: "Thank you",
+             icon: 'success',
+           }).then((result) => {
+             if (result.value) {
+               window.location.reload()
+             }
+           })
+           //mettre l'id dans l'url
+         },
+         error: function (xhr, ajaxOptions, thrownError) {
+         }
+     });
+   }
+   })
+
+   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+  var tableOfProfiles=[];
+  $("#alertSearch").hide()
+
+  var id=sessionStorage.getItem("userID")
+  if (id==null) {
+    document.location.href = `http://localhost:3000/login.html`
+
+  }
+  console.log("l'id est : "+id);
+  function pressEnter() {
+     var code=event.which || event.keyCode; //Selon le navigateur c'est which ou keyCode
+     if (code==13) { //le code de la touche Enter
+        console.log("pressed");
+        gotoProfile();
+    }
+  }
+
+  $.ajax({
+      async: true,
+      type: "POST",
+      url: "http://localhost:3000/api/users/id",
+      dataType:"json",
+      data: {
+          "id":id
+      },
+      success: function (json) {
+
+        window.parent.document.title = json.name
+        document.getElementById("name").innerHTML=json.name
+        document.getElementById("location").innerHTML+=json.location
+        document.getElementById("Job").innerHTML+=json.job
+        console.log(json);
+        if (json.picture==undefined) {
+          document.getElementById('photo').src="./assets/unknown.jpg"
+          document.getElementById('profilephoto').src="./assets/unknown.jpg"
+
+        }else {
+          document.getElementById('photo').src="data:image/png;base64," + json.picture
+          document.getElementById('profilephoto').src="data:image/png;base64," + json.picture
+
+        }
+
+
+        if (json.company!=undefined) {
+          console.log("hey");
+          document.getElementById("SchoolOrwork").innerHTML+=json.company
+
+        }else {
+          document.getElementById("SchoolOrwork").innerHTML+=json.school
+
+        }
+
+        var nbfollowers=json.nbfollowers
+        if(nbfollowers>=1000000){
+          nbfollowers=(nbfollowers/1000000).toFixed(1)+"M"
+          document.getElementById("nbfollowers").innerHTML+=nbfollowers
+
+        }
+        else if(nbfollowers>=1000){
+          nbfollowers=(nbfollowers/1000).toFixed(1)+"K";
+          document.getElementById("nbfollowers").innerHTML+=nbfollowers
+
+        }else {
+          document.getElementById("nbfollowers").innerHTML+=nbfollowers
+        }
+        if (json.projectid!=null) {
+          var currentProject=""
+          for (var i = 0; i < json.projectid.length; i++) {
+            if (json.currentproject!=null) {
+              var currentProject=json.currentproject.name
+            }
+            var projectid=json.projectid[i]
+          $.ajax({
+            async: true,
+            type: "POST",
+            url: "http://localhost:3000/api/projects/id",
+            dataType:"json",
+            data: {
+                "id":json.projectid[i]
+            },
+            success: function (json) {
+              console.log(json);
+
+              if (json.id!=undefined) {
+                var  buttonid=  Math.floor(Math.random() * 1000);
+                var  textid=  Math.floor(Math.random() * 1000);
+                console.log(json.id);
+
+                if (currentProject==json.name) {
+                  var id1=json.id
+                  $('#currentProject').append(`<option id="${id1}"  selected value="${id1}">${json.name}</option>`)
+                  //(`${projectid}`).hide()
+                  console.log(document.getElementById(`${id1}`));
+                }else {
+                  var id2=json.id
+
+                  $('#currentProject').append(`<option id="${id2}"  value="${id2}">${json.name}</option>`)
+                  //(`${projectid}`).hide()
+                  console.log(document.getElementById(`${id2}`));
+
+                  }
+
+                $('#project').append(`<p id="${textid}" class="font-italic mb-0"><button class="btn btn-danger btn-sm fa fa-minus-circle" id="${buttonid}" onclick="delete_Project(this.id,${textid})"></button> ${json.name}</p><br>`);
+
+
+               }
+             },
+             error: function(xhr, ajaxOptions, thrownError){
+
+             }
+           });
+         }
+       }
+  },
+      error: function (xhr, ajaxOptions, thrownError) {
+      }
+  });
+  // $.ajax({
+  //     async: true,
+  //     type: "POST",
+  //     url: "http://localhost:3000/api/users/id",
+  //     dataType:"json",
+  //     data: {
+  //       "id":sessionStorage.getItem("userID")
+  //     },
+  //     success: function (user) {
+  //       console.log(user.currentproject.name);
+  //       if (user.currentproject!=null) {
+  //         <option value="1">One</option>
+  //
+  //         $('#currentproject').append(`<option value=${user.currentproject.id}>One</option>`)
+  //         $('#currentproject').append(`<p id="currentid"  hidden class="font-italic mb-0">${user.currentProject.id}</p>`)
+  //         console.log(document.getElementById('currentid').innerText);
+  //
+  //       }
+  //
+  //
+  //       //mettre l'id dans l'url
+  //     },
+  //     error: function (xhr, ajaxOptions, thrownError) {
+  //     }
+  //
+  // });
+
+  function delete_Project(buttonid,textid){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete project!'
+    }).then((result) => {
+      if (result.value) {
+    $("#load").show()
+    console.log(textid);
+
+    console.log(document.getElementById("project"));
+    let projectName=document.getElementById(textid).innerText.replace(" ","")
+    console.log(projectName);
+
+    let myID=sessionStorage.getItem("userID");
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/id",
+        dataType:"json",
+        data: {
+            "id":myID
+        },
+        success: function (user) {
+          console.log(user.projectid);
+          var gittoken=user.gittoken
+          var gitUsername=user.gitUsername;
+          console.log("deletion");
+          $.ajax({
+              async: true,
+              type: "POST",
+              url: "http://localhost:3000/repos/delete",
+              dataType:"json",
+              data: {
+                  "gitUsername":gitUsername,
+                  "name":projectName,
+                  "token":gittoken
+              },
+              success: function (project) {
+
+
+                //mettre l'id dans l'url
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+              }
+          });
+          for (var i = 0; i < user.projectid.length; i++) {
+            let projectid=user.projectid[i]
+
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: "http://localhost:3000/api/projects/id",
+                dataType:"json",
+                data: {
+                    "id":user.projectid[i]
+                },
+                success: function (project) {
+                  if (project.name==projectName) {
+                    console.log(project.name);
+                    $.ajax({
+                        async: true,
+                        type: "POST",
+                        url: "http://localhost:3000/api/projects/deleteAll",
+                        dataType:"json",
+                        data: {
+                            "idOfUser":myID,
+                            "idofProject":projectid
+                        },
+                        success: function (json) {
+                          if (json.message=='Project deleted successfully') {
+                            $("#load").hide()
+                            Swal.fire(
+                              'Deleted!',
+                              'Your project does not exist anymore.',
+                              'success'
+
+                            ).then((result) => {
+                              if (result.value) {
+                                window.location.reload()
+                              }
+                          });
+                        }
+
+                          //mettre l'id dans l'url
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                        }
+                    });
+
+                  }
+
+                  //mettre l'id dans l'url
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                }
+            });
+          }
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+    $(`#${buttonid}`).remove();
+    $(`#${textid}`).remove();
+    $("#load").hide()
+
+}
+});
+    // var texte=document.getElementById(`${textid}`).innerText.replace(" ","");
+    // console.log(texte);
+    //
+    // console.log(texte==document.getElementById(`currentProject`).innerText);
+    // if (texte==document.getElementById(`currentProject`).innerText) {
+    //   $.ajax({
+    //       async: true,
+    //       type: "POST",
+    //       url: "http://localhost:3000/api/users/deleteCurrent",
+    //       dataType:"json",
+    //       data: {
+    //           "id":sessionStorage.getItem('userID')
+    //       },
+    //       success: function (user) {
+    //         if (user) {
+    //
+    //         }
+    //         $(`#currentid`).remove();
+    //
+    //
+    //         //mettre l'id dans l'url
+    //       },
+    //       error: function (xhr, ajaxOptions, thrownError) {
+    //       }
+    //   });
+    //
+    // }
+
+
+  }
+  function gotoProfile(){
+    var login=document.getElementById("search").value;
+    console.log(login);
+    if (login!="") {
+      $.ajax({
+          async: true,
+          type: "POST",
+          url: "http://localhost:3000/api/users/login",
+          dataType:"json",
+          data: {
+              "login":login
+          },
+          success: function (json) {
+            console.log(json);
+            if (json.id!=undefined) {
+
+              $("#alertSearch").hide()
+              var id=json.id;
+              var myID=sessionStorage.getItem("userID")
+              if (BigInt(id)==BigInt(myID)) {
+                document.location.href = `http://localhost:3000/editProfile.html`
+
+              }else {
+                document.location.href = `http://localhost:3000/profile.html?ProfileID=${id}`
+
+              }
+            }else {
+              $("#alertSearch").show()
+            }
+
+            //mettre l'id dans l'url
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+          }
+      });
+
+    }
+
+
+  }
+
+  function editProfile(){
+
+    var id=sessionStorage.getItem("userID")
+    console.log(id);
+  //  document.location.href = `http://localhost:3000/editProfile.html?id=${id}`
+
+  }
+  function logout(){
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/verifyCommit",
+        dataType:"json",
+        data:{
+          "id":sessionStorage.getItem("userID")
+        },
+        success: function (json) {
+
+          if (json.message!=null) {
+            console.log(json.message);
+            if (json.message=="no projects") {
+
+              setTimeout(function(){
+                var sessionkey=sessionStorage.removeItem("userID")
+                document.location.href = `http://localhost:3000/login.html`
+
+              },100)
+
+
+
+            }else if(json.message!="no problem"){
+              console.log(json);
+              if (json.message.length!=0) {
+
+
+              Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                html: `
+                       Projects not commited:
+                       <li>${json.message}</li>
+                     ` ,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete changes!'
+              }).then((result) => {
+                if (result.value) {
+                   $.ajax({
+                       async: true,
+                       type: "POST",
+                       url: "http://localhost:3000/api/users/logout",
+                       dataType:"json",
+                       data:{
+                         "id":sessionStorage.getItem("userID")
+                       },
+                       success: function (json) {
+                         if (json.message=="deleted") {
+                           Swal.fire(
+                             'Changes deleted!',
+                             'Your changes have been deleted.',
+                             'success'
+
+                           ).then((result)=>{
+                             if (result.value) {
+                               setTimeout(function(){
+                                 var sessionkey=sessionStorage.removeItem("userID")
+                                 document.location.href = `http://localhost:3000/login.html`
+
+                               },100)
+
+                             }
+                           })
+                         }
+
+                       },
+                       error: function (xhr, ajaxOptions, thrownError) {
+                       }
+                   });
+
+
+                 }
+                })
+              }else {
+                Swal.fire({
+                  title: 'Are you sure ?',
+                  text: 'For your project, we created a start src directory, we recommand you to push it before leaving',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Later'
+                }).then((result) => {
+                  if (result.value) {
+                     $.ajax({
+                         async: true,
+                         type: "POST",
+                         url: "http://localhost:3000/api/users/logout",
+                         dataType:"json",
+                         data:{
+                           "id":sessionStorage.getItem("userID")
+                         },
+                         success: function (json) {
+
+                                   var sessionkey=sessionStorage.removeItem("userID")
+                                   document.location.href = `http://localhost:3000/login.html`
+
+
+
+
+
+
+
+                         },
+                         error: function (xhr, ajaxOptions, thrownError) {
+                         }
+                     });
+
+
+                   }
+                  })
+              }
+            }else {
+            setTimeout(function(){  $.ajax({
+                  async: true,
+                  type: "POST",
+                  url: "http://localhost:3000/api/users/logout",
+                  dataType:"json",
+                  data:{
+                    "id":sessionStorage.getItem("userID")
+                  },
+                  success: function (json) {
+                    console.log("heloooo");
+                    setTimeout(function(){
+                      var sessionkey=sessionStorage.removeItem("userID")
+                      document.location.href = `http://localhost:3000/login.html`
+
+                    },100)
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                  }
+              });
+            },200)
+
+                        // var sessionkey=sessionStorage.removeItem("userID")
+                        // document.location.href = `http://localhost:3000/login.html`
+            }
+
+          }else {
+            console.log(json);
+
+            var sessionkey=sessionStorage.removeItem("userID")
+            document.location.href = `http://localhost:3000/login.html`
+
+          }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+
+  }
+
+  function showResult(str) {
+    console.log(str);
+
+
+    if (str!="") {
+      $.ajax({
+          async: true,
+          type: "POST",
+          url: "http://localhost:3000/api/users/name",
+          dataType:"json",
+          data:{
+            "name":str
+          },
+          success: function (json) {
+               if (typeof json.message !== 'undefined') {
+                   $("datalist").prepend(`<option>${json.message}</option>`)
+               }else {
+                 console.log(json[0]);
+                 console.log(json.length);
+                 for (var i = 0; i < json.length; i++) {
+                   if (!tableOfProfiles.includes(json[i].login)) {
+                     $("datalist").prepend(`<option>${json[i].login}</option>`)
+                     tableOfProfiles.push(json[i].login)
+                   }
+                 }
+
+               }
+
+
+             //  console.log(json.description);
+              // if (json.message!=NULL) {
+              //   if (json.message==" this project does nt exist ") {
+              //   }
+              // }
+              //
+
+
+           // document.getElementById("livesearch").innerHTML+=`<option>${json.message}</option>`
+
+            console.log(json);
+
+
+    }
+   });
+ }
+
+ }
+ $("#follow").click(function(){
+
+  var text=$("#follow").text();
+  console.log(text);
+  if (text=="Follow") {
+    $("#follow").removeClass("btn btn-danger btn-sm btn-block");
+    $(this).addClass("btn btn-success btn-sm btn-block");
+    $("#follow").text("Unfollow");
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/follow",
+        dataType:"json",
+        data: {
+            "id":id
+        },
+        success: function (json) {
+
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+  }else {
+    $("#follow").removeClass("btn btn-success btn-sm btn-block");
+    $(this).addClass("btn btn-danger btn-sm btn-block");
+    $("#follow").text("Unfollow");
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://localhost:3000/api/users/unfollow",
+        dataType:"json",
+        data: {
+            "id":id
+        },
+        success: function (json) {
+
+
+          //mettre l'id dans l'url
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        }
+    });
+
+  }
+
+
+});
+
+
+    // contact form animations
+    // $('#follow').click(function() {
+    //   alert("request sent !");
+    // })
+    // function getUrlVars() {
+    //     var vars = {};
+    //     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    //         vars[key] = value;
+    //     });
+    //     return vars;
+    //
+
+
+  $(function() {
+
+    // contact form animations
+    $('#contact').click(function() {
+      $("#image").remove();
+      $('#contactForm').fadeToggle();
+    })
+    $(document).mouseup(function (e) {
+      var container = $("#contactForm");
+
+      if (!container.is(e.target) // if the target of the click isn't the container...
+          && container.has(e.target).length === 0) // ... nor a descendant of the container
+      {
+          container.fadeOut();
+      }
+    });
+
+  });
+
+  </script>
+</html>
