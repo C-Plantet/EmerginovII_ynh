@@ -167,18 +167,6 @@ fi
 groupadd -f "$app"
 usermod -g "$app" "$app"
 
-#=================================================
-# PHP-FPM CONFIGURATION
-#=================================================
-
-# Overwrite the php-fpm configuration only if it's allowed
-if [ $overwrite_phpfpm -eq 1 ]
-then
-    ynh_script_progression --message="Upgrading php-fpm configuration..." --weight=2
-
-    # Create a dedicated php-fpm config
-    ynh_add_fpm_config --usage=$fpm_usage --footprint=$fpm_footprint
-fi
 
 #=================================================
 # SPECIFIC UPGRADE
@@ -219,6 +207,16 @@ then
 fi
 
 #=================================================
+# UPGRADE DEPENDENCIES
+#=================================================
+ynh_print_info --message="Upgrading dependencies..."
+
+ynh_remove_nodejs
+ynh_install_nodejs --nodejs_version=$nodejsversion
+ynh_use_nodejs
+
+
+#=================================================
 # RELOAD NGINX
 #=================================================
 ynh_script_progression --message="Reloading nginx web server..."
@@ -231,37 +229,6 @@ ynh_systemd_action --service_name=nginx --action=reload
 ynh_script_progression --message="Disabling maintenance mode..."
 
 ynh_maintenance_mode_OFF
-
-#=================================================
-# SEND A README FOR THE ADMIN
-#=================================================
-
-# Get main domain and buid the url of the admin panel of the app.
-admin_panel="https://$(grep portal_domain /etc/ssowat/conf.json | cut -d'"' -f4)/yunohost/admin/#/apps/$app"
-
-# Build the changelog
-# Get the value of admin_mail_html
-admin_mail_html=$(ynh_app_setting_get $app admin_mail_html)
-admin_mail_html="${admin_mail_html:-0}"
-# If a html email is required. Apply html to the changelog.
-if [ "$admin_mail_html" -eq 1 ]; then
-    format=html
-else
-    format=plain
-fi
-ynh_app_changelog --format=$format
-
-echo "You can configure this app easily by using the experimental __URL_TAG1__config-panel feature__URL_TAG2__$admin_panel/config-panel__URL_TAG3__.
-You can also find some specific actions for this app by using the experimental __URL_TAG1__action feature__URL_TAG2__$admin_panel/actions__URL_TAG3__.
-
-If you're facing an issue or want to improve this app, please open a new issue in this __URL_TAG1__project__URL_TAG2__https://github.com/YunoHost-Apps/my_webapp_ynh__URL_TAG3__.
-
----
-
-Changelog since your last upgrade:
-$(cat changelog)" > mail_to_send
-
-ynh_send_readme_to_admin --app_message="mail_to_send" --recipients=root --type=upgrade
 
 #=================================================
 # END OF SCRIPT

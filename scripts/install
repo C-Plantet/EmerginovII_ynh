@@ -12,13 +12,18 @@ source /usr/share/yunohost/helpers
 #=================================================
 # MANAGE SCRIPT FAILURE
 #=================================================
+ynh_print_info --message="Managing script failure..."
 
+ynh_clean_setup () {
+	ynh_clean_check_starting
+}
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
 
 #=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
+ynh_print_info --message="Retrieving arguments from the manifest..."
 
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
@@ -61,6 +66,23 @@ ynh_app_setting_set --app=$app --key=admin_mail_html --value=1
 #=================================================
 # STANDARD MODIFICATIONS
 #=================================================
+# FIND AND OPEN A PORT
+#=================================================
+ynh_print_info --message="Configuring firewall..."
+
+# Find an available port
+port=$(ynh_find_port --port=8095)
+ynh_app_setting_set --app=$app --key=port --value=$port
+
+#=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_print_info --message="Installing dependencies..."
+
+ynh_install_nodejs --nodejs_version="8.10.0"
+ynh_use_nodejs
+
+#=================================================
 # CREATE A MYSQL DATABASE
 #=================================================
 
@@ -72,6 +94,15 @@ then
     ynh_app_setting_set --app=$app --key=db_name --value=$db_name
     ynh_mysql_setup_db --db_user=$db_name --db_name=$db_name
 fi
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_print_info --message="Setting up source files..."
+
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
+# Download, check integrity, uncompress and patch the source from app.src
+ynh_setup_source --dest_dir="$final_path"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -88,12 +119,6 @@ ynh_script_progression --message="Configuring system user..."
 
 ynh_system_user_create --username=$app --home_dir="$final_path"
 
-if [ $with_sftp -eq 1 ]
-then
-    # Add the password to this user
-    chpasswd <<< "${app}:${password}"
-    ynh_app_setting_set --app=$app --key=password --value="$password"
-fi
 
 #=================================================
 # SPECIFIC SETUP
@@ -114,52 +139,32 @@ fi
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
+ynh_print_info --message="Modifying a config file..."
 
-mkdir -p "$final_path/www"
+config_file="$final_path/.env"
+cp "../conf/.env" $config_file
 
-if [ $with_sftp -eq 1 ]
-then
-    ynh_replace_string --match_string="__DOMAIN__" --replace_string="$domain" --target_file=../sources/www/index.html
-    ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file=../sources/www/index.html
-
-    # Copy files to the right place
-    cp "../sources/www/index.html" "$final_path/www/index.html"
-else
-    # Copy files to the right place
-    cp "../sources/www/index_no_sftp.html" "$final_path/www/index.html"
-fi
-
-if [ $with_mysql -eq 1 ]; then
-    # Store the database access
-    echo -e "# MySQL Database
-name: ${db_name}\nuser: ${db_name}\npass: ${db_pwd}" > ../sources/db_access.txt
-
-    # Copy files to the right place
-    cp -r "../sources/db_access.txt" "$final_path/db_access.txt"
-fi
+ynh_replace_string --match_string="__NODEJS_PATH__" --replace_string="$nodejs_path" --target_file="$config_file"
+ynh_replace_string --match_string="__DB_NAME__" --replace_string="$db_name" --target_file="$config_file"
+ynh_replace_string --match_string="__DOMAIN__" --replace_string="$domain" --target_file="$config_file"
+ynh_replace_string --match_string="__DOMAIN_URI__" --replace_string="$domain$path_url" --target_file="$config_file"
+ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="$config_file"
+ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="$config_file"
 
 #=================================================
-# PHP-FPM CONFIGURATION
+# STORE THE CONFIG FILE CHECKSUM
 #=================================================
-ynh_script_progression --message="Configuring php-fpm..." --weight=2
+ynh_print_info --message="Storing the config file checksum..."
 
-# Create a dedicated php-fpm config
-ynh_add_fpm_config --usage=low --footprint=low
-
-
-#=================================================
-# INSTALL DEPENDENCIES
-#=================================================
-ynh_print_info --message="Installing dependencies..."
-
-ynh_install_nodejs --nodejs_version="8.10.0"
-ynh_use_nodejs
+# Calculate and store the config file checksum into the app settings
+ynh_store_file_checksum --file="$config_file"
 
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
+ynh_print_info --message="Securing files and directories..."
 
 chown -R $app: "$final_path"
 # Home directory of the user needs to be owned by root to allow
@@ -183,46 +188,6 @@ fi
 ynh_script_progression --message="Reloading nginx web server..."
 
 ynh_systemd_action --service_name=nginx --action=reload
-
-#=================================================
-# SEND A README FOR THE ADMIN
-#=================================================
-
-# Get main domain and buid the url of the admin panel of the app.
-admin_panel="https://$(grep portal_domain /etc/ssowat/conf.json | cut -d'"' -f4)/yunohost/admin/#/apps/$app"
-
-if [ $with_mysql -eq 1 ]
-then
-    sql_infos="
-You've asked for a database, please find here the information about this SQL database.
-$(cat "$final_path/db_access.txt")
-"
-else
-    sql_infos=""
-fi
-
-if [ $with_sftp -eq 1 ]
-then
-    sftp_infos="You can connect to this repository by using sftp with the following credentials.
-Domain: $domain
-Port: $(grep "^Port" /etc/ssh/sshd_config | awk '{print $2}')
-User: $app
-Password: The one you set at installation."
-else
-    sftp_infos=""
-fi
-
-echo "This app is simply a blank web app container. You have to put your own app inside.
-$sql_infos
-Please put your files into this directory: $final_path/www/
-$sftp_infos
-
-You can configure this app easily by using the experimental __URL_TAG1__config-panel feature__URL_TAG2__$admin_panel/config-panel__URL_TAG3__.
-You can also find some specific actions for this app by using the experimental __URL_TAG1__action feature__URL_TAG2__$admin_panel/actions__URL_TAG3__.
-
-If you're facing an issue or want to improve this app, please open a new issue in this __URL_TAG1__project__URL_TAG2__https://github.com/YunoHost-Apps/my_webapp_ynh__URL_TAG3__." > mail_to_send
-
-ynh_send_readme_to_admin --app_message="mail_to_send" --recipients=root --type=install
 
 #=================================================
 # END OF SCRIPT
