@@ -71,7 +71,7 @@ ynh_app_setting_set --app=$app --key=admin_mail_html --value=1
 ynh_print_info --message="Configuring firewall..."
 
 # Find an available port
-port=$(ynh_find_port --port=8095)
+port=$(ynh_find_port --port=3000)
 ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
@@ -128,14 +128,40 @@ then
 fi
 
 #=================================================
+# SETUP SYSTEMD
+#=================================================
+ynh_print_info --message="Configuring a systemd service..."
+
+# Create a dedicated systemd config
+ynh_replace_string --match_string="__NODEJS_PATH__" --replace_string="$nodejs_path" --target_file="../conf/systemd.service"
+ynh_add_systemd_config
+
+#=================================================
 # MODIFY A CONFIG FILE
 #=================================================
+ynh_print_info --message="Modifying a config file..."
+
+config_file="$final_path/.env"
+cp "../conf/.env" $config_file
+
+ynh_replace_string --match_string="__NODEJS_PATH__" --replace_string="$nodejs_path" --target_file="$config_file"
+ynh_replace_string --match_string="__DOMAIN__" --replace_string="$domain" --target_file="$config_file"
+ynh_replace_string --match_string="__DOMAIN_URI__" --replace_string="$domain$path_url" --target_file="$config_file"
+ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="$config_file"
+ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="$config_file"
 
 mkdir -p "$final_path/www"
 
     # Copy files to the right place
     cp -r "../sources/www/" "$final_path/"
 
+#=================================================
+# STORE THE CONFIG FILE CHECKSUM
+#=================================================
+ynh_print_info --message="Storing the config file checksum..."
+
+# Calculate and store the config file checksum into the app settings
+ynh_store_file_checksum --file="$config_file"
 
 #=================================================
 # GENERIC FINALIZATION
