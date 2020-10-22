@@ -141,6 +141,11 @@ ynh_add_systemd_config
 #=================================================
 ynh_print_info --message="Modifying a config file..."
 
+mkdir -p "$final_path/www"
+
+    # Copy files to the right place
+    cp -r "../sources/www/" "$final_path/"
+
 config_file="$final_path/.env"
 cp "../conf/.env" $config_file
 
@@ -149,11 +154,6 @@ ynh_replace_string --match_string="__DOMAIN__" --replace_string="$domain" --targ
 ynh_replace_string --match_string="__DOMAIN_URI__" --replace_string="$domain$path_url" --target_file="$config_file"
 ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="$config_file"
 ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="$config_file"
-
-mkdir -p "$final_path/www"
-
-    # Copy files to the right place
-    cp -r "../sources/www/" "$final_path/"
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM
@@ -176,6 +176,17 @@ ynh_store_file_checksum --file="$config_file"
 #chown root: "$final_path"
 
 #A FAIRE
+
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_print_info --message="Starting a systemd service..."
+
+# Start a systemd service
+ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
+if [ ${PACKAGE_CHECK_EXEC:-0} -eq 1 ]; then
+	sleep 60
+fi
 
 #=================================================
 # SETUP SSOWAT
