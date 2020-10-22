@@ -3,8 +3,7 @@
     "name": "Emerginov2",
     "packaging_format": 1,
     "description": {
-        "en": "Custom Web app with SFTP access",
-        "fr": "Application Web personnalisée avec accès SFTP"
+        "en": ""
     },
     "version": "1.0~ynh3",
     "url": "https://github.com/YunoHost-Apps/my_webapp_ynh",
@@ -40,8 +39,8 @@
                     "en": "Choose a path for your Webapp",
                     "fr": "Choisissez un chemin pour votre Webapp"
                 },
-                "example": "/site",
-                "default": "/site"
+                "example": "/app",
+                "default": "/app"
             },
             {
                 "name": "with_sftp",
