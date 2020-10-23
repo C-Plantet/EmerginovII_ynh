@@ -21,6 +21,7 @@ path_url=$(ynh_app_setting_get --app=$app --key=path)
 is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
+db_user=$(ynh_app_setting_get --app=$app --key=db_user)
 with_sftp=$(ynh_app_setting_get --app=$app --key=with_sftp)
 password=$(ynh_app_setting_get --app=$app --key=password)
 
@@ -76,11 +77,6 @@ if [ -z "$overwrite_nginx" ]; then
 	ynh_app_setting_set --app=$app --key=overwrite_nginx --value=$overwrite_nginx
 fi
 
-# If overwrite_phpfpm doesn't exist, create it
-if [ -z "$overwrite_phpfpm" ]; then
-	overwrite_phpfpm=1
-	ynh_app_setting_set --app=$app --key=overwrite_phpfpm --value=$overwrite_phpfpm
-fi
 
 # If admin_mail_html doesn't exist, create it
 if [ -z "$admin_mail_html" ]; then
