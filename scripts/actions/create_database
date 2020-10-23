@@ -12,8 +12,6 @@ source /usr/share/yunohost/helpers
 #=================================================
 # RETRIEVE ARGUMENTS
 #=================================================
-
-with_mysql=$(ynh_app_setting_get --app=$app --key=with_mysql)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
 app=${YNH_APP_INSTANCE_NAME:-$YNH_APP_ID}
@@ -33,10 +31,8 @@ app=${YNH_APP_INSTANCE_NAME:-$YNH_APP_ID}
 #=================================================
 ynh_script_progression --message="Removing the previous database..." --weight=6
 
-if [ $with_mysql -eq 1 ]
-then
-	yunohost app action run $app remove_database
-fi
+yunohost app action run $app remove_database
+
 
 #=================================================
 # CREATE A NEW DATABASE
@@ -48,13 +44,12 @@ db_name=$(ynh_sanitize_dbid --db_name=$app)
 # Reuse the previous password if existing
 db_pwd=$(grep "pass:" "$final_path/db_access.txt" | cut -d' ' -f2 2> /dev/null)
 
-ynh_mysql_setup_db --db_user=$db_name --db_name=$db_name --db_pwd=$db_pwd
+ynh_psql_setup_db --db_user=$db_name --db_name=$db_name --db_pwd=$db_pwd
 
-echo -e "# MySQL Database
+echo -e "# POSTGRESQL Database
     name: ${db_name}\nuser: ${db_name}\npass: ${db_pwd}" > "$final_path/db_access.txt"
 
 # Update the config of the app
-ynh_app_setting_set --app=$app --key=with_mysql --value=1
 ynh_app_setting_set --app=$app --key=db_name --value=$db_name
 
 #=================================================

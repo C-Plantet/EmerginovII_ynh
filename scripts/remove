@@ -17,7 +17,6 @@ ynh_script_progression --message="Loading installation settings..." --weight=2
 app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
-with_mysql=$(ynh_app_setting_get --app=$app --key=with_mysql)
 with_sftp=$(ynh_app_setting_get --app=$app --key=with_sftp)
 
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
@@ -27,15 +26,14 @@ final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 #=================================================
 # STANDARD REMOVE
 #=================================================
-# REMOVE THE MYSQL DATABASE
+# REMOVE THE POSTGRESQL DATABASE
 #=================================================
 
-if [ $with_mysql -eq 1 ]; then
-    ynh_script_progression --message="Removing the MySQL database..." --weight=2
+ynh_script_progression --message="Removing the POSTGRESQL database..." --weight=2
 
-    # Remove a database if it exists, along with the associated user
-    ynh_mysql_remove_db --db_user=$db_user --db_name=$db_name
-fi
+# Remove a database along with the associated user
+ynh_psql_remove_db --db_user=$db_user --db_name=$db_name
+
 
 #=================================================
 # REMOVE APP MAIN DIR
