@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({limit:'50mb', extended: true }));
 
 
 
-app.use(express.static(__dirname + '/public'));
+app.use('/my_webapp_node', express.static(__dirname + '/public'));
 
 //routes
 app.use('/api/projects',projectRoutes);
