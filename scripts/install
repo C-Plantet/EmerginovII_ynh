@@ -31,6 +31,9 @@ with_sftp=$YNH_APP_ARG_WITH_SFTP
 password=$YNH_APP_ARG_PASSWORD
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
+db_name=$YNH_APP_ARG_DOMAIN
+db_usre=$YNH_APP_ARG_DOMAIN
+
 app=$YNH_APP_INSTANCE_NAME
 app_nb=$YNH_APP_INSTANCE_NUMBER
 
@@ -56,8 +59,8 @@ ynh_app_setting_set --app=$app --key=is_public --value=$is_public
 ynh_app_setting_set --app=$app --key=with_sftp --value=$with_sftp
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
-ynh_app_setting_set --app=$app --key=db_name --value=db_emerginov
-ynh_app_setting_set --app=$app --key=db_user --value=user_test
+ynh_app_setting_set --app=$app --key=db_name --value=$db_name
+ynh_app_setting_set --app=$app --key=db_user --value=$db_user
 
 ynh_app_setting_set --app=$app --key=overwrite_nginx --value=0
 ynh_app_setting_set --app=$app --key=overwrite_phpfpm --value=1

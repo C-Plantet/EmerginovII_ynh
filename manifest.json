@@ -69,6 +69,24 @@
                     "fr": "Est-ce un site public ?"
                 },
                 "default": true
+            },
+            {
+                "name": "db_name",
+                "type": "string",
+                "ask": {
+                    "en": "Set the name of the db",
+                    "fr": "Choisir le nom de la bdd"
+                },
+                "default": "db_emerginov"
+            },
+            {
+                "name": "db_user",
+                "type": "username",
+                "ask": {
+                    "en": "Set the name of the db user",
+                    "fr": "Choisir le nom de l'utilisateur de la bdd"
+                },
+                "default": "test_user"
             }
         ]
     }
