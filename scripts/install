@@ -89,10 +89,41 @@ ynh_use_nodejs
 # CREATE A POSTGRESQL DATABASE
 #=================================================
 
-ynh_script_progression --message="Creating a POSTGRESQL database..." --weight=2
+ynh_script_progression --message="Configuring Postgresql database..."
+ynh_psql_test_if_first_run
+ynh_psql_execute_as_root \
+    --sql "CREATE DATABASE db_emerginov;
+		CREATE USER ${db_user} WITH ENCRYPTED PASSWORD 'azerty';
+		GRANT ALL PRIVILEGES ON DATABASE ${db_name} TO ${db_user};
 
-ynh_app_setting_set --app=$app --key=db_name --value=$db_name
-ynh_psql_setup_db --db_user=$db_user --db_name=$db_name
+		CREATE TABLE IF NOT EXISTS projects (
+		  id INTEGER PRIMARY KEY,
+		  name text NOT NULL CHECK (name <> ''),
+		  priority integer ,
+		  description text,
+		  deliverydate date
+		);
+		CREATE TABLE IF NOT EXISTS users (
+		  id BigInt PRIMARY KEY ,
+		  name text NOT NULL,
+		  login text NOT NULL ,
+		  gitToken text,
+		  job text ,
+		  mastodon text,
+		  gitUsername text,
+		  email text,
+		  location text,
+		  school text,
+		  nbfollowers INTEGER,
+		  listoffollow JSON[],
+		  projectid INTEGER[],
+		  picture text,
+		  hashedPassword text,
+		  currentProject JSON,
+		  requests JSON[],
+		  company text
+
+		);"
 
 
 #=================================================
