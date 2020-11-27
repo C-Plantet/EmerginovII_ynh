@@ -22,8 +22,6 @@ is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$(ynh_app_setting_get --app=$app --key=db_user)
-with_sftp=$(ynh_app_setting_get --app=$app --key=with_sftp)
-password=$(ynh_app_setting_get --app=$app --key=password)
 
 overwrite_nginx=$(ynh_app_setting_get --app=$app --key=overwrite_nginx)
 overwrite_phpfpm=$(ynh_app_setting_get --app=$app --key=overwrite_phpfpm)
@@ -96,12 +94,6 @@ if [ -z "$fpm_usage" ]; then
 	ynh_app_setting_set --app=$app --key=fpm_usage --value=$fpm_usage
 fi
 
-# If with_sftp doesn't exist, create it
-if [ -z "$with_sftp" ]; then
-	with_sftp=1
-	ynh_app_setting_set --app=$app --key=with_sftp --value=$with_sftp
-fi
-
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
@@ -162,23 +154,6 @@ fi
 groupadd -f "$app"
 usermod -g "$app" "$app"
 
-
-#=================================================
-# SPECIFIC UPGRADE
-#=================================================
-# CONFIGURE SSH
-#=================================================
-
-if [ $with_sftp -eq 1 ]
-then
-    ynh_script_progression --message="Configuring ssh..." --weight=1
-
-    cp -R ../conf/ssh_regenconf_hook /usr/share/yunohost/hooks/conf_regen/90-ssh_$app
-
-    ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file=/usr/share/yunohost/hooks/conf_regen/90-ssh_$app
-
-    yunohost tools regen-conf ssh
-fi
 
 #=================================================
 # GENERIC FINALIZATION

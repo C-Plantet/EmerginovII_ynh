@@ -28,8 +28,6 @@ path_url=$(ynh_app_setting_get --app=$app --key=path)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$(ynh_app_setting_get --app=$app --key=db_user)
-with_sftp=$(ynh_app_setting_get --app=$app --key=with_sftp)
-password=$(ynh_app_setting_get --app=$app --key=password)
 
 #=================================================
 # CHECK IF THE APP CAN BE RESTORED
@@ -88,21 +86,6 @@ chown -R $app: "$final_path"
 # Home directory of the user need to be owned by root to allow
 # SFTP connections
 chown root: "$final_path"
-
-#=================================================
-# SPECIFIC RESTORATION
-#=================================================
-# CONFIGURE SSH
-#=================================================
-
-if [ $with_sftp -eq 1 ]
-then
-    ynh_script_progression --message="Configuring ssh..."
-
-    ynh_restore_file "/usr/share/yunohost/hooks/conf_regen/90-ssh_$app"
-
-    yunohost tools regen-conf ssh
-fi
 
 #=================================================
 # GENERIC FINALIZATION

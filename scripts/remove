@@ -17,7 +17,6 @@ ynh_script_progression --message="Loading installation settings..." --weight=2
 app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
-with_sftp=$(ynh_app_setting_get --app=$app --key=with_sftp)
 
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$(ynh_app_setting_get --app=$app --key=db_user)
@@ -61,19 +60,6 @@ ynh_print_info --message="Removing dependencies..."
 # Remove metapackage and its dependencies
 ynh_remove_app_dependencies
 ynh_remove_nodejs
-
-#=================================================
-# SPECIFIC REMOVE
-#=================================================
-# REMOVE THE CUSTOM SSH CONFIG
-#=================================================
-
-if [ $with_sftp -eq 1 ]
-then
-    ynh_script_progression --message="Removing the custom ssh config..."
-    ynh_secure_remove --file="/usr/share/yunohost/hooks/conf_regen/90-ssh_$app"
-    yunohost tools regen-conf ssh
-fi
 
 #=================================================
 # GENERIC FINALIZATION

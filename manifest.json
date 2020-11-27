@@ -19,7 +19,7 @@
     "services": [
         "nginx",
         "nodejs",
-        "mysql"
+        "psql"
     ],
     "arguments": {
         "install" : [
@@ -41,25 +41,6 @@
                 },
                 "example": "/app",
                 "default": "/app"
-            },
-            {
-                "name": "with_sftp",
-                "type": "boolean",
-                "ask": {
-                    "en": "Do you need a SFTP access?",
-                    "fr": "Avez-vous besoin d'un accès SFTP ?"
-                },
-                "default": true
-            },
-            {
-                "name": "password",
-                "type": "password",
-                "optional": true,
-                "ask": {
-                    "en": "Set the password for the SFTP access.",
-                    "fr": "Définissez le mot de passe pour l'accès SFTP."
-                },
-                "example": "myreallystrengthpassword"
             },
             {
                 "name": "is_public",

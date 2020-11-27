@@ -27,8 +27,6 @@ ynh_print_info --message="Retrieving arguments from the manifest..."
 
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
-with_sftp=$YNH_APP_ARG_WITH_SFTP
-password=$YNH_APP_ARG_PASSWORD
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
 db_name=$YNH_APP_ARG_DOMAIN
@@ -55,8 +53,6 @@ ynh_script_progression --message="Storing installation settings..."
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
-ynh_app_setting_set --app=$app --key=is_public --value=$is_public
-ynh_app_setting_set --app=$app --key=with_sftp --value=$with_sftp
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
 ynh_app_setting_set --app=$app --key=db_name --value=$db_name
@@ -143,20 +139,6 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 #=================================================
 # SPECIFIC SETUP
 #=================================================
-# CONFIGURE SSH
-#=================================================
-if [ $with_sftp -eq 1 ]
-then
-    ynh_script_progression --message="Configuring ssh..."
-
-    cp -R ../conf/ssh_regenconf_hook /usr/share/yunohost/hooks/conf_regen/90-ssh_$app
-
-    ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file=/usr/share/yunohost/hooks/conf_regen/90-ssh_$app
-
-    yunohost tools regen-conf ssh
-fi
-
-#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_print_info --message="Configuring a systemd service..."
@@ -172,8 +154,8 @@ ynh_print_info --message="Modifying a config file..."
 
 mkdir -p "$final_path/www"
 
-    # Copy files to the right place
-    cp -r "../sources/www/" "$final_path/"
+# Copy files to the right place
+cp -r "../sources/www/" "$final_path/"
 
 config_file="$final_path/.env"
 cp "../conf/.env" $config_file
@@ -183,6 +165,13 @@ ynh_replace_string --match_string="__DOMAIN__" --replace_string="$domain" --targ
 ynh_replace_string --match_string="__DOMAIN_URI__" --replace_string="$domain$path_url" --target_file="$config_file"
 ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="$config_file"
 ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="$config_file"
+
+# Store the database access
+echo -e "# MySQL Database
+name: ${db_name}\nuser: ${db_name}\npass: ${db_pwd}" > ../sources/db_access.txt
+
+# Copy files to the right place
+cp -r "../sources/db_access.txt" "$final_path/db_access.txt"
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM

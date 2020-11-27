@@ -26,24 +26,6 @@ app=${YNH_APP_INSTANCE_NAME:-$YNH_APP_ID}
 # If the form has a value for a variable, take the value from the form,
 # Otherwise, keep the value from the app config.
 
-# with_sftp
-old_with_sftp="$(ynh_app_setting_get --app=$app --key=with_sftp)"
-with_sftp="${YNH_CONFIG_MAIN_SFTP_SFTP:-$old_with_sftp}"
-
-# sftp password
-is_password_exist=0
-password=$(ynh_app_setting_get --app=$app --key=password)
-if [ -n "$password" ]
-then
-    ynh_print_warn --message="A password already exist, it will not be replaced."
-    # If a password already exist, unset the variable password and to not change it.
-    unset password
-    is_password_exist=1
-else
-    # Otherwise, get the new password
-    password="$YNH_CONFIG_MAIN_SFTP_PASSWORD"
-fi
-
 
 # Overwrite nginx configuration
 old_overwrite_nginx="$(ynh_app_setting_get --app=$app --key=overwrite_nginx)"
@@ -80,7 +62,6 @@ fpm_usage="${YNH_CONFIG_MAIN_PHP_FPM_CONFIG_USAGE:-$old_fpm_usage}"
 show_config() {
 	# here you are supposed to read some config file/database/other then print the values
 	# ynh_return "YNH_CONFIG_${PANEL_ID}_${SECTION_ID}_${OPTION_ID}=value"
-	ynh_return "YNH_CONFIG_MAIN_SFTP_SFTP=$with_sftp"
 # 	ynh_return "YNH_CONFIG_MAIN_SFTP_PASSWORD=$password"
 
 	ynh_return "YNH_CONFIG_MAIN_PHP_FPM_CONFIG_FOOTPRINT=$fpm_footprint"
@@ -93,23 +74,6 @@ show_config() {
 #=================================================
 
 apply_config() {
-    #=================================================
-    # REMOVE OR ADD SFTP ACCESS
-    #=================================================
-
-    if [ "$with_sftp" != "$old_with_sftp" ]
-    then
-        yunohost app action run $app sftp --args with_sftp=$with_sftp
-
-        # Change the password only if none was already set for the user
-        if [ $is_password_exist -eq 0 ] && [ $with_sftp -eq 1 ]
-        then
-            # Add the password to the user
-            chpasswd <<< "${app}:${password}"
-            ynh_app_setting_set --app=$app --key=password --value="$password"
-        fi
-    fi
-
     #=================================================
     # RECONFIGURE PHP-FPM
     #=================================================

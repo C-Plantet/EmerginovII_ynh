@@ -27,7 +27,6 @@ final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$(ynh_app_setting_get --app=$app --key=db_user)
-with_sftp=$(ynh_app_setting_get --app=$app --key=with_sftp)
 
 #=================================================
 # STANDARD BACKUP STEPS
@@ -50,20 +49,8 @@ ynh_backup --src_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 # BACKUP THE POSTGRESQL DATABASE
 #=================================================
 
-    ynh_script_progression --message="Backing up the POSTGRESQL database..."
-    ynh_psql_dump_db --database="$db_name" > db.sql
-
-
-#=================================================
-# BACKUP SPECIFIC FILES
-#=================================================
-
-if [ $with_sftp -eq 1 ]
-then
-    ynh_script_progression --message="Backup specific files..."
-
-    ynh_backup "/usr/share/yunohost/hooks/conf_regen/90-ssh_$app"
-fi
+ynh_script_progression --message="Backing up the POSTGRESQL database..."
+ynh_psql_dump_db --database="$db_name" > db.sql
 
 #=================================================
 # END OF SCRIPT
