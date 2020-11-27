@@ -15,6 +15,7 @@ const  {
 
 const IN_PROD=NODE_ENV=='production'
 console.log(session);
+
 //Importing routes
 import gitRoutes from './routes/git'
 import projectRoutes from './routes/projects';
@@ -27,38 +28,33 @@ import smsRoutes from './routes/sms';
 import mailRoutes from './routes/mail';
 import mastodonRoutes from './routes/mastodon';
 import zipRoutes from './routes/zip';
+
 //middlewares
 import  { storage1 } from './controllers/user.controller'
+
 app.use(morgan('dev'));
 app.use(json({limit:'50mb'}));
+
 // support parsing of application/json type post data
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({limit:'50mb', extended: true }));
 
-
-
-
 app.use(express.static(__dirname + '/public'));
 
 //routes
-app.use('/api/projects',projectRoutes);
-app.use('/api/users',usersRoutes);
-app.use('/api/users/login',usersRoutes);
-app.use('/home',homeRoutes);
-app.use('/php',phpRoutes);
-app.use('/save',saveRoutes);
-app.use('/repos',gitRoutes);
-app.use('/slack',slackRoutes);
-app.use('/sms',smsRoutes);
-app.use('/mail',mailRoutes);
-app.use('/mastodon',mastodonRoutes);
-app.use('/zip',zipRoutes);
-
-
-
-
-
+app.use('/app/api/projects',projectRoutes);
+app.use('/app/api/users',usersRoutes);
+app.use('/app/api/users/login',usersRoutes);
+app.use('/app/home',homeRoutes);
+app.use('/app/php',phpRoutes);
+app.use('/app/save',saveRoutes);
+app.use('/app/repos',gitRoutes);
+app.use('/app/slack',slackRoutes);
+app.use('/app/sms',smsRoutes);
+app.use('/app/mail',mailRoutes);
+app.use('/app/mastodon',mastodonRoutes);
+app.use('/app/zip',zipRoutes);
 
 export default app;
