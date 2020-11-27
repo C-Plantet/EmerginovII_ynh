@@ -1,13 +1,11 @@
 {
-    "id": "my_webapp_node",
     "name": "Emerginov2",
-    "packaging_format": 1,
+    "id": "my_webapp_node",
     "description": {
         "en": ""
     },
     "version": "1.0~ynh3",
-    "url": "https://github.com/YunoHost-Apps/my_webapp_ynh",
-    "license": "GPL-3.0-only",
+    "license": "free",
     "maintainer": {
         "name": "None...",
         "email": ""
