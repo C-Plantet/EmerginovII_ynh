@@ -24,6 +24,14 @@ db_user=$(ynh_app_setting_get --app=$app --key=db_user)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
 #=================================================
+# STOP AND REMOVE SERVICE
+#=================================================
+ynh_print_info --message="Stopping and removing the systemd service..."
+
+# Remove the dedicated systemd config
+ynh_remove_systemd_config
+
+#=================================================
 # STANDARD REMOVE
 #=================================================
 # REMOVE THE POSTGRESQL DATABASE
