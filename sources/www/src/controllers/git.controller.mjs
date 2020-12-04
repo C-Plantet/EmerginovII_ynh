@@ -1,9 +1,9 @@
 //require("dotenv").config();
 const  octokit = require('@octokit/rest');
 var $ = require("jquery");
-import {copyFiles_And_CreateVirtualHost} from './php.controller.mjs'
-import Users from '../models/Users.mjs';
-import Project from '../models/Project.mjs';
+import copyFiles_And_CreateVirtualHost from './php.controller.js'
+import Users from '../models/Users.js';
+import Project from '../models/Project.js';
 //var Git = require("nodegit");
 var fs = require('fs-extra');
 var rimraf = require("rimraf");

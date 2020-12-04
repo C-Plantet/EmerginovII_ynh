@@ -1,9 +1,8 @@
-import express from 'express';
+import express, {json} from 'express';
 import morgan from 'morgan';
 import bodyParser from "body-parser";
-import session from "./controllers/user.controller.mjs"
+import session from "./controllers/user.controller.js"
 const app=express();
-app.use(express.json());
 const TWO_HOURS=1000*60*60*2;
 const  {
   port=3000,
@@ -18,22 +17,23 @@ const IN_PROD=NODE_ENV=='production'
 console.log(session);
 
 //Importing routes
-import gitRoutes from './routes/git.mjs'
-import projectRoutes from './routes/projects.mjs';
-import usersRoutes from './routes/users.mjs';
-import homeRoutes from './routes/home.mjs';
-import phpRoutes from './routes/php.mjs';
-import saveRoutes from './routes/save.mjs';
-import slackRoutes from './routes/slack.mjs';
-import smsRoutes from './routes/sms.mjs';
-import mailRoutes from './routes/mail.mjs';
-import mastodonRoutes from './routes/mastodon.mjs';
-import zipRoutes from './routes/zip.mjs';
+import gitRoutes from './routes/git.js'
+import projectRoutes from './routes/projects.js';
+import usersRoutes from './routes/users.js';
+import homeRoutes from './routes/home.js';
+import phpRoutes from './routes/php.js';
+import saveRoutes from './routes/save.js';
+import slackRoutes from './routes/slack.js';
+import smsRoutes from './routes/sms.js';
+import mailRoutes from './routes/mail.js';
+import mastodonRoutes from './routes/mastodon.js';
+import zipRoutes from './routes/zip.js';
 
 //middlewares
-import  { storage1 } from './controllers/user.controller.mjs'
+import  { storage1 } from './controllers/user.controller.js'
 
 app.use(morgan('dev'));
+app.use(json({limit: '50mb'}));
 
 // support parsing of application/json type post data
 app.use(bodyParser.json({limit: '50mb', extended: true}));

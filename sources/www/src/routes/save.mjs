@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-import {get_And_Save_Code,show_Code,fictive_Save} from '../controllers/save.controller.mjs';
+import {Router} from 'express';
+const router = Router();
+
+import {get_And_Save_Code,show_Code,fictive_Save} from '../controllers/save.controller.js';
 
 
 router.post( '/', get_And_Save_Code);

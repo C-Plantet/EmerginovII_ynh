@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import { sequelize } from '../database/database.mjs';
+import { sequelize } from '../database/database.js';
 
 const Users=sequelize.define('users',{
   id:{

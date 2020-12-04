@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-import {getFile,create_DirectoryOrFile,update_DirectoryOrFile,delete_DirectoryOrFile} from '../controllers/file.controller.mjs';
+import {Router} from 'express';
+const router = Router();
+
+import {getFile,create_DirectoryOrFile,update_DirectoryOrFile,delete_DirectoryOrFile} from '../controllers/file.controller.js';
 
 
 router.post   ( '/editor' , getFile);
