@@ -625,4 +625,6 @@ export async function updateUser(req,res){
       data:users
     })
   }
+
+  export var storage1;
   export default storage1;

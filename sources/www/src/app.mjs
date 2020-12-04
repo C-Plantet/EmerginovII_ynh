@@ -1,8 +1,9 @@
-import express, {json} from 'express';
+import express from 'express';
 import morgan from 'morgan';
 import bodyParser from "body-parser";
 import session from "./controllers/user.controller.mjs"
 const app=express();
+app.use(express.json());
 const TWO_HOURS=1000*60*60*2;
 const  {
   port=3000,
@@ -33,7 +34,6 @@ import zipRoutes from './routes/zip.mjs';
 import  { storage1 } from './controllers/user.controller.mjs'
 
 app.use(morgan('dev'));
-app.use(json({limit:'50mb'}));
 
 // support parsing of application/json type post data
 app.use(bodyParser.json({limit: '50mb', extended: true}));
