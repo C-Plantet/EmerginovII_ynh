@@ -26,7 +26,7 @@ ynh_abort_if_errors
 ynh_print_info --message="Retrieving arguments from the manifest..."
 
 domain=$YNH_APP_ARG_DOMAIN
-path_url="/app"
+path_url="/my_webapp_node"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
 db_name=$YNH_APP_ARG_DB_NAME
