@@ -570,17 +570,17 @@ export async function getUserByLoginAndPassword(req,res){
             storage.setItem('userID', user.id)
             storage1=user.id
 
-            return res.redirect(`http://localhost:3000/`);
+            return res.redirect(`https://emerginov.com/my_webapp_node/`);
 
           }else {
-            return res.redirect(`http://localhost:3000/login.html`);
+            return res.redirect(`https://emerginov.com/my_webapp_node/login.html`);
 
           }
 
 
 
       }else {
-        return res.redirect(`http://localhost:3000/login.html`);
+        return res.redirect(`https://emerginov.com/my_webapp_node/login.html`);
 
       }
     }
