@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 const Mastodon=require('mastodon-api');
 var http = require('http');
 var fs = require('fs');

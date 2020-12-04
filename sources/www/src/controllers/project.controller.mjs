@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 
 import Project from '../models/Project.mjs';
 import Users from '../models/Users.mjs';

@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 const accountSid = 'ACd6d506454a4dd8ad756513b1eba9983c';
 const authToken = 'a29e726be0912641452a6c70adb41382';
 

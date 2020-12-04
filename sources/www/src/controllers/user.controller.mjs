@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 import Users from '../models/Users.mjs';
 import Project from '../models/Project.mjs';
 var passwordHash = require('password-hash');

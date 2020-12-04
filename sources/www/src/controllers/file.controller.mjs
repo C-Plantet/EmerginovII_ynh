@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 const dirTree = require("directory-tree");
 var fs = require('fs');
 var fs1 = require('fs-extra');

@@ -1,4 +1,7 @@
 //require("dotenv").config();
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 const  octokit = require('@octokit/rest');
 var $ = require("jquery");
 import {copyFiles_And_CreateVirtualHost} from './php.controller.mjs'

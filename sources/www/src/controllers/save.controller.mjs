@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
   var fs = require('fs');
 
 export async function fictive_Save(req, res){

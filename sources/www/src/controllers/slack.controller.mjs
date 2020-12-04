@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 const token= "xoxp-835473819876-837792425767-838148967462-a6d016a4d8b66f07baf85eeb865406e9"
 const {
   WebClient

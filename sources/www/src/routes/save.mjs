@@ -1,3 +1,6 @@
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
 var express = require('express');
 var router = express.Router();
 import {get_And_Save_Code,show_Code,fictive_Save} from '../controllers/save.controller.mjs';

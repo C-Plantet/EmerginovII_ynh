@@ -1,6 +1,10 @@
   /*global phpCode, resultBody, uniter */
   //var uniter = require('uniter');
 //  var fs = require('fs');
+
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url);
+
   import Users from '../models/Users.mjs';
   var rimraf = require("rimraf");
 
