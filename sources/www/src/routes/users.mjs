@@ -1,6 +1,5 @@
-import { Router } from 'express';
-
-const router = Router();
+var express = require('express');
+var router = express.Router();
 
 import { createUser,getUsers,getUserById,deleteUser,updateUser,getUsersByProject,checkFollower,searchUserByLogin,acceptRequest,getUserByName,verifyCommit,newFollower,unFollow,updatePicture,getUserByLoginAndPassword,getSession,logout,changeCurrent} from '../controllers/user.controller.mjs';
 

@@ -1,6 +1,5 @@
-import { Router } from 'express';
-
-const router = Router();
+var express = require('express');
+var router = express.Router();
 
 import { createProject, getProjects,getProjectById,deleteProject,updateProject,getProjectByUserId,deleteProjectFromAllTables,getProjectByName,verifyRequest,sendReq} from '../controllers/project.controller.mjs';
 
