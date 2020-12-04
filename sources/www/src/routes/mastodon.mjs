@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 const router = Router();
-import {putMessage} from '../controllers/mastodon.controller';
+import {putMessage} from '../controllers/mastodon.controller.mjs';
 
 
 router.post('/send' , putMessage);

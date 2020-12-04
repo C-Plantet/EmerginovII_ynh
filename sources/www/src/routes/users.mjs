@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-import { createUser,getUsers,getUserById,deleteUser,updateUser,getUsersByProject,checkFollower,searchUserByLogin,acceptRequest,getUserByName,verifyCommit,newFollower,unFollow,updatePicture,getUserByLoginAndPassword,getSession,logout,changeCurrent} from '../controllers/user.controller';
+import { createUser,getUsers,getUserById,deleteUser,updateUser,getUsersByProject,checkFollower,searchUserByLogin,acceptRequest,getUserByName,verifyCommit,newFollower,unFollow,updatePicture,getUserByLoginAndPassword,getSession,logout,changeCurrent} from '../controllers/user.controller.mjs';
 
 // /api/users/
 router.post('/',createUser);

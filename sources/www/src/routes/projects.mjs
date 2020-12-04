@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-import { createProject, getProjects,getProjectById,deleteProject,updateProject,getProjectByUserId,deleteProjectFromAllTables,getProjectByName,verifyRequest,sendReq} from '../controllers/project.controller';
+import { createProject, getProjects,getProjectById,deleteProject,updateProject,getProjectByUserId,deleteProjectFromAllTables,getProjectByName,verifyRequest,sendReq} from '../controllers/project.controller.mjs';
 
 // /api/projects/
 router.post('/',createProject);

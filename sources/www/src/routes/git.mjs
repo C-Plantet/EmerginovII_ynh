@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 const router = Router();
-import {create_Git_Repository,delete_Git_Repository,pushRepo,pullRepo} from '../controllers/git.controller';
+import {create_Git_Repository,delete_Git_Repository,pushRepo,pullRepo} from '../controllers/git.controller.mjs';
 
 //http://localhost:3000/repos/create"
 

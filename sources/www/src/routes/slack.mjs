@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 const router = Router();
-import {getLastMessage,putMessage} from '../controllers/slack.controller';
+import {getLastMessage,putMessage} from '../controllers/slack.controller.mjs';
 
 
 router.post('/' , getLastMessage);
