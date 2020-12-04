@@ -26,11 +26,11 @@ ynh_abort_if_errors
 ynh_print_info --message="Retrieving arguments from the manifest..."
 
 domain=$YNH_APP_ARG_DOMAIN
-path_url=$YNH_APP_ARG_PATH
+path_url="/app"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
-db_name=$YNH_APP_ARG_DOMAIN
-db_user=$YNH_APP_ARG_DOMAIN
+db_name=$YNH_APP_ARG_DB_NAME
+db_user=$YNH_APP_ARG_DB_USER
 
 app=$YNH_APP_INSTANCE_NAME
 app_nb=$YNH_APP_INSTANCE_NUMBER

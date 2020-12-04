@@ -31,16 +31,6 @@
                 "example": "domain.org"
             },
             {
-                "name": "path",
-                "type": "path",
-                "ask": {
-                    "en": "Choose a path for your Webapp",
-                    "fr": "Choisissez un chemin pour votre Webapp"
-                },
-                "example": "/app",
-                "default": "/app"
-            },
-            {
                 "name": "is_public",
                 "type": "boolean",
                 "ask": {
