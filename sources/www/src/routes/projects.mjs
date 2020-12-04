@@ -1,8 +1,7 @@
-import { Router } from 'express';
+var express = require('express');
+var router = express.Router();
 
-const router = Router();
-
-import { createProject, getProjects,getProjectById,deleteProject,updateProject,getProjectByUserId,deleteProjectFromAllTables,getProjectByName,verifyRequest,sendReq} from '../controllers/project.controller';
+import { createProject, getProjects,getProjectById,deleteProject,updateProject,getProjectByUserId,deleteProjectFromAllTables,getProjectByName,verifyRequest,sendReq} from '../controllers/project.controller.mjs';
 
 // /api/projects/
 router.post('/',createProject);

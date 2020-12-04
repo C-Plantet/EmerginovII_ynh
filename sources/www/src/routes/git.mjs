@@ -1,7 +1,7 @@
-import { Router } from 'express';
+var express = require('express');
+var router = express.Router();
 
-const router = Router();
-import {create_Git_Repository,delete_Git_Repository,pushRepo,pullRepo} from '../controllers/git.controller';
+import {create_Git_Repository,delete_Git_Repository,pushRepo,pullRepo} from '../controllers/git.controller.mjs';
 
 //http://localhost:3000/repos/create"
 

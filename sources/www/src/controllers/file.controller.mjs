@@ -3,7 +3,7 @@ var fs = require('fs');
 var fs1 = require('fs-extra');
 var rimraf = require("rimraf");
 
-import Users from '../models/Users';
+import Users from '../models/Users.mjs';
 const simpleGitPromise = require('simple-git')();
 
 
