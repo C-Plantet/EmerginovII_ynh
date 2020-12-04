@@ -57,7 +57,7 @@ export async function createUser(req, res){
     if(newUser){
       setTimeout(function(){
         console.log("user created successfully");
-        res.redirect("/login.html")},500)
+        res.redirect("https://emerginov.com/my_webapp_node/login.html")},500)
       }
 
   }catch(error){
