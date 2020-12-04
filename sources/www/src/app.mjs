@@ -1,7 +1,7 @@
 import express, {json} from 'express';
 import morgan from 'morgan';
 import bodyParser from "body-parser";
-import session from "./controllers/user.controller.js"
+import session from "./controllers/user.controller.mjs"
 const app=express();
 const TWO_HOURS=1000*60*60*2;
 const  {
@@ -30,7 +30,7 @@ import mastodonRoutes from './routes/mastodon';
 import zipRoutes from './routes/zip';
 
 //middlewares
-import  { storage1 } from './controllers/user.controller'
+import  { storage1 } from './controllers/user.controller.mjs'
 
 app.use(morgan('dev'));
 app.use(json({limit:'50mb'}));
