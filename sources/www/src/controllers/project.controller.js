@@ -1,6 +1,6 @@
 
-import Project from '../models/Project.js';
-import Users from '../models/Users.js';
+import Project from '../models/Project';
+import Users from '../models/Users';
 const { Op } = require("sequelize");
 var newRequests=[]
 var fs = require('fs');

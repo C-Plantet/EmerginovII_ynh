@@ -1,7 +1,7 @@
-import {Router} from 'express';
-const router = Router();
+import { Router } from 'express';
 
-import {zip_Code,unZip_Code} from '../controllers/zip.controller.js';
+const router = Router();
+import {zip_Code,unZip_Code} from '../controllers/zip.controller';
 
 
 router.post( '/', zip_Code);

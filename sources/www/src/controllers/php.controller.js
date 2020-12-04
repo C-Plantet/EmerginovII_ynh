@@ -1,7 +1,7 @@
   /*global phpCode, resultBody, uniter */
   //var uniter = require('uniter');
 //  var fs = require('fs');
-  import Users from '../models/Users.js';
+  import Users from '../models/Users';
   var rimraf = require("rimraf");
 
   var sudo = require('sudo-js');

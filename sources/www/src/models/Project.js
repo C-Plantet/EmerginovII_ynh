@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
-import { sequelize }  from '../database/database.js';
-import Users from './Users.js';
+import { sequelize }  from '../database/database';
+import Users from './Users';
 
 const Project= sequelize.define('projects',{
   id:{

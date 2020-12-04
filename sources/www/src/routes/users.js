@@ -1,8 +1,8 @@
-import {Router} from 'express';
+import { Router } from 'express';
+
 const router = Router();
 
-
-import { createUser,getUsers,getUserById,deleteUser,updateUser,getUsersByProject,checkFollower,searchUserByLogin,acceptRequest,getUserByName,verifyCommit,newFollower,unFollow,updatePicture,getUserByLoginAndPassword,getSession,logout,changeCurrent} from '../controllers/user.controller.js';
+import { createUser,getUsers,getUserById,deleteUser,updateUser,getUsersByProject,checkFollower,searchUserByLogin,acceptRequest,getUserByName,verifyCommit,newFollower,unFollow,updatePicture,getUserByLoginAndPassword,getSession,logout,changeCurrent} from '../controllers/user.controller';
 
 // /api/users/
 router.post('/',createUser);

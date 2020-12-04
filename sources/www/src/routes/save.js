@@ -1,7 +1,7 @@
-import {Router} from 'express';
-const router = Router();
+import { Router } from 'express';
 
-import {get_And_Save_Code,show_Code,fictive_Save} from '../controllers/save.controller.js';
+const router = Router();
+import {get_And_Save_Code,show_Code,fictive_Save} from '../controllers/save.controller';
 
 
 router.post( '/', get_And_Save_Code);

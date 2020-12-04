@@ -1,8 +1,8 @@
-import {Router} from 'express';
+import { Router } from 'express';
+
 const router = Router();
 
-
-import { createProject, getProjects,getProjectById,deleteProject,updateProject,getProjectByUserId,deleteProjectFromAllTables,getProjectByName,verifyRequest,sendReq} from '../controllers/project.controller.js';
+import { createProject, getProjects,getProjectById,deleteProject,updateProject,getProjectByUserId,deleteProjectFromAllTables,getProjectByName,verifyRequest,sendReq} from '../controllers/project.controller';
 
 // /api/projects/
 router.post('/',createProject);

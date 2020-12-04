@@ -1,7 +1,7 @@
-import {Router} from 'express';
-const router = Router();
+import { Router } from 'express';
 
-import {getFile,create_DirectoryOrFile,update_DirectoryOrFile,delete_DirectoryOrFile} from '../controllers/file.controller.js';
+const router = Router();
+import {getFile,create_DirectoryOrFile,update_DirectoryOrFile,delete_DirectoryOrFile} from '../controllers/file.controller';
 
 
 router.post   ( '/editor' , getFile);

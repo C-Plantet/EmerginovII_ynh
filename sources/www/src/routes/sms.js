@@ -1,7 +1,7 @@
-import {Router} from 'express';
-const router = Router();
+import { Router } from 'express';
 
-import {sendSMS} from '../controllers/sms.controller.js';
+const router = Router();
+import {sendSMS} from '../controllers/sms.controller';
 
 
 router.post   ( '/send' , sendSMS);

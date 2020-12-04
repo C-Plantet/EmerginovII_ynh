@@ -1,5 +1,5 @@
-import Users from '../models/Users.js';
-import Project from '../models/Project.js';
+import Users from '../models/Users';
+import Project from '../models/Project';
 var passwordHash = require('password-hash');
 var storage = require('node-sessionstorage')
 var storage1="";
@@ -625,5 +625,4 @@ export async function updateUser(req,res){
       data:users
     })
   }
-
   export default storage1;
