@@ -794,7 +794,7 @@ function pullRepo(){
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_webapp_node/repos/pull",
+      url: "http://emerginov/my_webapp_node/repos/pull",
       dataType:"json",
       data:{
         "id":sessionStorage.getItem('userID')
@@ -870,7 +870,7 @@ function pushRepo(){
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_webapp_node/repos/push",
+      url: "http://emerginov/my_webapp_node/repos/push",
       dataType:"json",
       data:{
         "id":sessionStorage.getItem("userID"),
@@ -975,7 +975,7 @@ function acceptRequest(e){
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_webapp_node/api/users/acceptRequest",
+      url: "http://emerginov/my_webapp_node/api/users/acceptRequest",
       dataType:"json",
       data:{
         "id":myID,
@@ -1024,7 +1024,7 @@ $("#createProject").click(function(){
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_webapp_node/repos/create",
+        url: "http://emerginov/my_webapp_node/repos/create",
         dataType:"json",
         data:{
           "myID":id,
@@ -1084,11 +1084,11 @@ $("#createProject").click(function(){
 $.ajax({
     async: true,
     type: "POST",
-    url: "https://localhost:3000/my_webapp_node/api/users/session",
+    url: "http://emerginov/my_webapp_node/api/users/session",
     dataType:"json",
     success: function (json) {
      if (json.session=="") {
-       document.location.href = `https://localhost:3000/login.html`
+       document.location.href = `http://emerginov/login.html`
 
      }else {
        sessionStorage.setItem("userID",json.session)
@@ -1117,7 +1117,7 @@ $(function  () {
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_webapp_node/api/users/id",
+      url: "http://emerginov/my_webapp_node/api/users/id",
       dataType:"json",
       data:{
         "id":myID
@@ -1133,7 +1133,7 @@ $(function  () {
          $.ajax({
              async: true,
              type: "POST",
-             url: "https://localhost:3000/my_webapp_node/api/users/id",
+             url: "http://emerginov/my_webapp_node/api/users/id",
              dataType:"json",
              data:{
                "id":json.requests[i].senderID
@@ -1642,7 +1642,7 @@ function setVisibility(){
      $.ajax({
          async: true,
          type: "POST",
-         url: "https://localhost:3000/my_webapp_node/api/users/login",
+         url: "http://emerginov/my_webapp_node/api/users/login",
          dataType:"json",
          data: {
              "login":login
@@ -1655,10 +1655,10 @@ function setVisibility(){
              var id=json.id;
              var myID=sessionStorage.getItem("userID")
              if (BigInt(id)==BigInt(myID)) {
-               document.location.href = `https://localhost:3000/editProfile.html`
+               document.location.href = `http://emerginov/editProfile.html`
 
              }else {
-               document.location.href = `https://localhost:3000/profile.html?ProfileID=${id}`
+               document.location.href = `http://emerginov/profile.html?ProfileID=${id}`
 
              }
 
@@ -1685,7 +1685,7 @@ function setVisibility(){
      $.ajax({
          async: true,
          type: "POST",
-         url: "https://localhost:3000/my_webapp_node/api/users/name",
+         url: "http://emerginov/my_webapp_node/api/users/name",
          dataType:"json",
          data:{
            "name":str
@@ -1879,7 +1879,7 @@ function hideMarker() {
      $.ajax({
          async: true,
          type: "POST",
-         url: "https://localhost:3000/my_webapp_node/save/fictiveSave",
+         url: "http://emerginov/my_webapp_node/save/fictiveSave",
          dataType:"json",
          data: {
              "code":textContent,
@@ -1906,7 +1906,7 @@ function hideMarker() {
       $.ajax({
           async: true,
           type: "POST",
-          url: "https://localhost:3000/my_webapp_node/save",
+          url: "http://emerginov/my_webapp_node/save",
           dataType:"json",
           data: {
               "code":textContent,
@@ -1956,7 +1956,7 @@ function hideMarker() {
      setTimeout(function(){$.ajax({
          async: true,
          type: "POST",
-         url: "https://localhost:3000/my_webapp_node/save/show",
+         url: "http://emerginov/my_webapp_node/save/show",
          dataType:"json",
          data:{
            "new_path":new_path
@@ -1991,7 +1991,7 @@ function hideMarker() {
               $.ajax({
                   async: true,
                   type: "POST",
-                  url: "https://localhost:3000/my_webapp_node/php",
+                  url: "http://emerginov/my_webapp_node/php",
                   dataType:"json",
                   data: {
                       "id":sessionStorage.getItem("userID"),
@@ -2024,7 +2024,7 @@ function hideMarker() {
               $.ajax({
                   async: true,
                   type: "POST",
-                  url: "https://localhost:3000/my_webapp_node/home/editor",
+                  url: "http://emerginov/my_webapp_node/home/editor",
                   dataType: "json",
                   data:{
                     "id":myID
@@ -2094,7 +2094,7 @@ function hideMarker() {
                        $.ajax({
                            async: true,
                            type: "POST",
-                           url: "https://localhost:3000/my_webapp_node/home/project",
+                           url: "http://emerginov/my_webapp_node/home/project",
                            data: {
                              "path":path,
                              "type":"folder"
@@ -2124,7 +2124,7 @@ function hideMarker() {
                       $.ajax({
                           async: true,
                           type: "POST",
-                          url: "https://localhost:3000/my_webapp_node/home/project",
+                          url: "http://emerginov/my_webapp_node/home/project",
                           data: {
                             "path":path,
                             "type":"file"
@@ -2196,7 +2196,7 @@ function hideMarker() {
      $.ajax({
          async: true,
          type: "POST",
-         url: "https://localhost:3000/my_webapp_node/save/show",
+         url: "http://emerginov/my_webapp_node/save/show",
          dataType:"json",
          data:{
            "new_path":new_path
@@ -2243,7 +2243,7 @@ function hideMarker() {
        $.ajax({
            async: true,
            type: "DELETE",
-           url: "https://localhost:3000/my_webapp_node/home/project",
+           url: "http://emerginov/my_webapp_node/home/project",
            data: {
              "path":path,
              "type":type
@@ -2270,7 +2270,7 @@ function hideMarker() {
         $.ajax({
             async: true,
             type: "PUT",
-            url: "https://localhost:3000/my_webapp_node/home/project",
+            url: "http://emerginov/my_webapp_node/home/project",
             data: {
               "old_path": old_path,
               "new_path": new_path,
@@ -2474,14 +2474,14 @@ function checkPageFocus() {
   }
   function editProfile(){
     var sessionkey=sessionStorage.getItem("userID")
-    document.location.href = `https://localhost:3000/editProfile.html?id=${sessionkey}`
+    document.location.href = `http://emerginov/editProfile.html?id=${sessionkey}`
 
   }
   function logout(){
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_webapp_node/pi/users/verifyCommit",
+        url: "http://emerginov/my_webapp_node/pi/users/verifyCommit",
         dataType:"json",
         data:{
           "id":sessionStorage.getItem("userID")
@@ -2494,7 +2494,7 @@ function checkPageFocus() {
 
               setTimeout(function(){
                 var sessionkey=sessionStorage.removeItem("userID")
-                document.location.href = `https://localhost:3000/login.html`
+                document.location.href = `http://emerginov/login.html`
 
               },100)
 
@@ -2522,7 +2522,7 @@ function checkPageFocus() {
                    $.ajax({
                        async: true,
                        type: "POST",
-                       url: "https://localhost:3000/my_webapp_node/api/users/logout",
+                       url: "http://emerginov/my_webapp_node/api/users/logout",
                        dataType:"json",
                        data:{
                          "id":sessionStorage.getItem("userID")
@@ -2538,7 +2538,7 @@ function checkPageFocus() {
                              if (result.value) {
                                setTimeout(function(){
                                  var sessionkey=sessionStorage.removeItem("userID")
-                                 document.location.href = `https://localhost:3000/login.html`
+                                 document.location.href = `http://emerginov/login.html`
 
                                },100)
 
@@ -2568,7 +2568,7 @@ function checkPageFocus() {
                      $.ajax({
                          async: true,
                          type: "POST",
-                         url: "https://localhost:3000/my_webapp_node/api/users/logout",
+                         url: "http://emerginov/my_webapp_node/api/users/logout",
                          dataType:"json",
                          data:{
                            "id":sessionStorage.getItem("userID")
@@ -2576,7 +2576,7 @@ function checkPageFocus() {
                          success: function (json) {
 
                                    var sessionkey=sessionStorage.removeItem("userID")
-                                   document.location.href = `https://localhost:3000/login.html`
+                                   document.location.href = `http://emerginov/login.html`
 
 
 
@@ -2597,7 +2597,7 @@ function checkPageFocus() {
             setTimeout(function(){  $.ajax({
                   async: true,
                   type: "POST",
-                  url: "https://localhost:3000/my_webapp_node/api/users/logout",
+                  url: "http://emerginov/my_webapp_node/api/users/logout",
                   dataType:"json",
                   data:{
                     "id":sessionStorage.getItem("userID")
@@ -2606,7 +2606,7 @@ function checkPageFocus() {
                     console.log("heloooo");
                     setTimeout(function(){
                       var sessionkey=sessionStorage.removeItem("userID")
-                      document.location.href = `https://localhost:3000/login.html`
+                      document.location.href = `http://emerginov/login.html`
 
                     },100)
                   },
@@ -2623,7 +2623,7 @@ function checkPageFocus() {
             console.log(json);
 
             var sessionkey=sessionStorage.removeItem("userID")
-            document.location.href = `https://localhost:3000/login.html`
+            document.location.href = `http://emerginov/login.html`
 
           }
         },
@@ -2642,7 +2642,7 @@ function checkPageFocus() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_webapp_node/api/users/id",
+        url: "http://emerginov/my_webapp_node/api/users/id",
         data: {
           "id":id
         },
@@ -2702,7 +2702,7 @@ console.log(id);
 $.ajax({
     async: true,
     type: "POST",
-    url: "https://localhost:3000/my_webapp_node/api/users/id",
+    url: "http://emerginov/my_webapp_node/api/users/id",
     data: {
       "id":id
     },
@@ -2737,7 +2737,7 @@ $.ajax({
         $.ajax({
             async: true,
             type: "POST",
-            url: "https://localhost:3000/my_webapp_node/mastodon/send",
+            url: "http://emerginov/my_webapp_node/mastodon/send",
             data: {
               "message":value
             },
@@ -2780,7 +2780,7 @@ function pressEnter() {
         $.ajax({
             async: true,
             type: "POST",
-            url: "https://localhost:3000/my_webapp_node/slack/send",
+            url: "http://emerginov/my_webapp_node/slack/send",
             data: {
               "message":value
             },
@@ -2803,7 +2803,7 @@ function pressEnter() {
         $.ajax({
             async: true,
             type: "POST",
-            url: "https://localhost:3000/my_webapp_node/zip/",
+            url: "http://emerginov/my_webapp_node/zip/",
             data: {
             },
             success: function (json) {
