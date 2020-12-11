@@ -239,7 +239,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item ">
-            <a class="nav-link" href="https://localhost:3000/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="https://localhost:8000/">Home <span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <ul class="form-inline my-2 my-lg-0" >
@@ -352,7 +352,7 @@
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/api/users/changeCurrent",
+        url: "https://localhost:8000/api/users/changeCurrent",
         dataType:"json",
         data: {
             "id":sessionStorage.getItem("userID"),
@@ -432,7 +432,7 @@
        var idOfUser = url.substring(url.lastIndexOf('=') + 1);
        id=parseInt(idOfUser)
        console.log("l'id est : "+id);
-      if (pic.length>30000) {
+      if (pic.length>80000) {
         console.log(pic.length);
 
       }
@@ -440,7 +440,7 @@
      $.ajax({
          async: true,
          type: "POST",
-         url: "https://localhost:3000/api/users/picture",
+         url: "https://localhost:8000/api/users/picture",
          dataType:"json",
          data: {
              "id":id,
@@ -475,7 +475,7 @@
 
   var id=sessionStorage.getItem("userID")
   if (id==null) {
-    document.location.href = `https://localhost:3000/login.html`
+    document.location.href = `https://localhost:8000/login.html`
 
   }
   console.log("l'id est : "+id);
@@ -490,7 +490,7 @@
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/api/users/id",
+      url: "https://localhost:8000/api/users/id",
       dataType:"json",
       data: {
           "id":id
@@ -545,7 +545,7 @@
           $.ajax({
             async: true,
             type: "POST",
-            url: "https://localhost:3000/api/projects/id",
+            url: "https://localhost:8000/api/projects/id",
             dataType:"json",
             data: {
                 "id":json.projectid[i]
@@ -590,7 +590,7 @@
   // $.ajax({
   //     async: true,
   //     type: "POST",
-  //     url: "https://localhost:3000/api/users/id",
+  //     url: "https://localhost:8000/api/users/id",
   //     dataType:"json",
   //     data: {
   //       "id":sessionStorage.getItem("userID")
@@ -636,7 +636,7 @@
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/api/users/id",
+        url: "https://localhost:8000/api/users/id",
         dataType:"json",
         data: {
             "id":myID
@@ -649,7 +649,7 @@
           $.ajax({
               async: true,
               type: "POST",
-              url: "https://localhost:3000/repos/delete",
+              url: "https://localhost:8000/repos/delete",
               dataType:"json",
               data: {
                   "gitUsername":gitUsername,
@@ -670,7 +670,7 @@
             $.ajax({
                 async: true,
                 type: "POST",
-                url: "https://localhost:3000/api/projects/id",
+                url: "https://localhost:8000/api/projects/id",
                 dataType:"json",
                 data: {
                     "id":user.projectid[i]
@@ -681,7 +681,7 @@
                     $.ajax({
                         async: true,
                         type: "POST",
-                        url: "https://localhost:3000/api/projects/deleteAll",
+                        url: "https://localhost:8000/api/projects/deleteAll",
                         dataType:"json",
                         data: {
                             "idOfUser":myID,
@@ -736,7 +736,7 @@
     //   $.ajax({
     //       async: true,
     //       type: "POST",
-    //       url: "https://localhost:3000/api/users/deleteCurrent",
+    //       url: "https://localhost:8000/api/users/deleteCurrent",
     //       dataType:"json",
     //       data: {
     //           "id":sessionStorage.getItem('userID')
@@ -765,7 +765,7 @@
       $.ajax({
           async: true,
           type: "POST",
-          url: "https://localhost:3000/api/users/login",
+          url: "https://localhost:8000/api/users/login",
           dataType:"json",
           data: {
               "login":login
@@ -778,10 +778,10 @@
               var id=json.id;
               var myID=sessionStorage.getItem("userID")
               if (BigInt(id)==BigInt(myID)) {
-                document.location.href = `https://localhost:3000/editProfile.html`
+                document.location.href = `https://localhost:8000/editProfile.html`
 
               }else {
-                document.location.href = `https://localhost:3000/profile.html?ProfileID=${id}`
+                document.location.href = `https://localhost:8000/profile.html?ProfileID=${id}`
 
               }
             }else {
@@ -803,14 +803,14 @@
 
     var id=sessionStorage.getItem("userID")
     console.log(id);
-  //  document.location.href = `https://localhost:3000/editProfile.html?id=${id}`
+  //  document.location.href = `https://localhost:8000/editProfile.html?id=${id}`
 
   }
   function logout(){
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/api/users/verifyCommit",
+        url: "https://localhost:8000/api/users/verifyCommit",
         dataType:"json",
         data:{
           "id":sessionStorage.getItem("userID")
@@ -823,7 +823,7 @@
 
               setTimeout(function(){
                 var sessionkey=sessionStorage.removeItem("userID")
-                document.location.href = `https://localhost:3000/login.html`
+                document.location.href = `https://localhost:8000/login.html`
 
               },100)
 
@@ -851,7 +851,7 @@
                    $.ajax({
                        async: true,
                        type: "POST",
-                       url: "https://localhost:3000/api/users/logout",
+                       url: "https://localhost:8000/api/users/logout",
                        dataType:"json",
                        data:{
                          "id":sessionStorage.getItem("userID")
@@ -867,7 +867,7 @@
                              if (result.value) {
                                setTimeout(function(){
                                  var sessionkey=sessionStorage.removeItem("userID")
-                                 document.location.href = `https://localhost:3000/login.html`
+                                 document.location.href = `https://localhost:8000/login.html`
 
                                },100)
 
@@ -897,7 +897,7 @@
                      $.ajax({
                          async: true,
                          type: "POST",
-                         url: "https://localhost:3000/api/users/logout",
+                         url: "https://localhost:8000/api/users/logout",
                          dataType:"json",
                          data:{
                            "id":sessionStorage.getItem("userID")
@@ -905,7 +905,7 @@
                          success: function (json) {
 
                                    var sessionkey=sessionStorage.removeItem("userID")
-                                   document.location.href = `https://localhost:3000/login.html`
+                                   document.location.href = `https://localhost:8000/login.html`
 
 
 
@@ -926,7 +926,7 @@
             setTimeout(function(){  $.ajax({
                   async: true,
                   type: "POST",
-                  url: "https://localhost:3000/api/users/logout",
+                  url: "https://localhost:8000/api/users/logout",
                   dataType:"json",
                   data:{
                     "id":sessionStorage.getItem("userID")
@@ -935,7 +935,7 @@
                     console.log("heloooo");
                     setTimeout(function(){
                       var sessionkey=sessionStorage.removeItem("userID")
-                      document.location.href = `https://localhost:3000/login.html`
+                      document.location.href = `https://localhost:8000/login.html`
 
                     },100)
                   },
@@ -945,14 +945,14 @@
             },200)
 
                         // var sessionkey=sessionStorage.removeItem("userID")
-                        // document.location.href = `https://localhost:3000/login.html`
+                        // document.location.href = `https://localhost:8000/login.html`
             }
 
           }else {
             console.log(json);
 
             var sessionkey=sessionStorage.removeItem("userID")
-            document.location.href = `https://localhost:3000/login.html`
+            document.location.href = `https://localhost:8000/login.html`
 
           }
         },
@@ -971,7 +971,7 @@
       $.ajax({
           async: true,
           type: "POST",
-          url: "https://localhost:3000/api/users/name",
+          url: "https://localhost:8000/api/users/name",
           dataType:"json",
           data:{
             "name":str
@@ -1021,7 +1021,7 @@
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/api/users/follow",
+        url: "https://localhost:8000/api/users/follow",
         dataType:"json",
         data: {
             "id":id
@@ -1042,7 +1042,7 @@
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/api/users/unfollow",
+        url: "https://localhost:8000/api/users/unfollow",
         dataType:"json",
         data: {
             "id":id
