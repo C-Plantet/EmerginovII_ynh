@@ -794,7 +794,7 @@ function pullRepo(){
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_webapp_node/my_webapp_node/repos/pull",
+      url: "https://localhost:3000/my_webapp_node/repos/pull",
       dataType:"json",
       data:{
         "id":sessionStorage.getItem('userID')
@@ -870,7 +870,7 @@ function pushRepo(){
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_webapp_node/my_webapp_node/repos/push",
+      url: "https://localhost:3000/my_webapp_node/repos/push",
       dataType:"json",
       data:{
         "id":sessionStorage.getItem("userID"),
