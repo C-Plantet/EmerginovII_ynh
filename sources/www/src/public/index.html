@@ -1084,7 +1084,7 @@ $("#createProject").click(function(){
 $.ajax({
     async: true,
     type: "POST",
-    url: "https://emerginov.com/my_webapp_node/api/users/session",
+    url: "https://localhost:3000/my_webapp_node/api/users/session",
     dataType:"json",
     success: function (json) {
      if (json.session=="") {
