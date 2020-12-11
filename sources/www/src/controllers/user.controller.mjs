@@ -57,7 +57,7 @@ export async function createUser(req, res){
     if(newUser){
       setTimeout(function(){
         console.log("user created successfully");
-        res.redirect("https://localhost:3000/login.html")},500)
+        res.redirect("/my_webapp_node/login.html")},500)
       }
 
   }catch(error){
@@ -570,17 +570,17 @@ export async function getUserByLoginAndPassword(req,res){
             storage.setItem('userID', user.id)
             storage1=user.id
 
-            return res.redirect(`https://localhost:3000/`);
+            return res.redirect(`/my_webapp_node/`);
 
           }else {
-            return res.redirect(`https://localhost:3000/login.html`);
+            return res.redirect(`/my_webapp_node/login.html`);
 
           }
 
 
 
       }else {
-        return res.redirect(`https://localhost:3000/login.html`);
+        return res.redirect(`/my_webapp_node/login.html`);
 
       }
     }
