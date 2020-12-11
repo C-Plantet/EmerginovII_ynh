@@ -240,7 +240,7 @@
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_web_app/api/users/id",
+      url: "https://localhost:3000/my_webapp_node/api/users/id",
       dataType:"json",
       data: {
           "id":id
@@ -258,7 +258,7 @@
           $.ajax({
             async: true,
             type: "POST",
-            url: "https://localhost:3000/my_web_app/api/projects/id",
+            url: "https://localhost:3000/my_webapp_node/api/projects/id",
             dataType:"json",
             data: {
                 "id":json.projectid[i]
@@ -282,7 +282,7 @@
                 $.ajax({
                     async: true,
                     type: "POST",
-                    url: "https://localhost:3000/my_web_app/api/projects/verifyRequest",
+                    url: "https://localhost:3000/my_webapp_node/api/projects/verifyRequest",
                     dataType:"json",
                     data: {
                         "projectName":projectName,
@@ -386,7 +386,7 @@
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_web_app/api/projects/name",
+        url: "https://localhost:3000/my_webapp_node/api/projects/name",
         dataType:"json",
         data: {
             "name":ProjectName
@@ -396,7 +396,7 @@
           $.ajax({
               async: true,
               type: "POST",
-              url: "https://localhost:3000/my_web_app/api/projects/sendReq",
+              url: "https://localhost:3000/my_webapp_node/api/projects/sendReq",
               dataType:"json",
               data: {
                   "projectName":json.name,
@@ -441,7 +441,7 @@
       $.ajax({
           async: true,
           type: "POST",
-          url: "https://localhost:3000/my_web_app/api/users/login",
+          url: "https://localhost:3000/my_webapp_node/api/users/login",
           dataType:"json",
           data: {
               "login":login
@@ -480,7 +480,7 @@
   $.ajax({
       async: true,
       type: "POST",
-      url: "https://localhost:3000/my_web_app/api/users/id",
+      url: "https://localhost:3000/my_webapp_node/api/users/id",
       data: {
         "id":id
       },
@@ -522,7 +522,7 @@
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_web_app/api/users/verifyCommit",
+        url: "https://localhost:3000/my_webapp_node/api/users/verifyCommit",
         dataType:"json",
         data:{
           "id":sessionStorage.getItem("userID")
@@ -563,7 +563,7 @@
                    $.ajax({
                        async: true,
                        type: "POST",
-                       url: "https://localhost:3000/my_web_app/api/users/logout",
+                       url: "https://localhost:3000/my_webapp_node/api/users/logout",
                        dataType:"json",
                        data:{
                          "id":sessionStorage.getItem("userID")
@@ -609,7 +609,7 @@
                      $.ajax({
                          async: true,
                          type: "POST",
-                         url: "https://localhost:3000/my_web_app/api/users/logout",
+                         url: "https://localhost:3000/my_webapp_node/api/users/logout",
                          dataType:"json",
                          data:{
                            "id":sessionStorage.getItem("userID")
@@ -638,7 +638,7 @@
             setTimeout(function(){  $.ajax({
                   async: true,
                   type: "POST",
-                  url: "https://localhost:3000/my_web_app/api/users/logout",
+                  url: "https://localhost:3000/my_webapp_node/api/users/logout",
                   dataType:"json",
                   data:{
                     "id":sessionStorage.getItem("userID")
@@ -683,7 +683,7 @@
       $.ajax({
           async: true,
           type: "POST",
-          url: "https://localhost:3000/my_web_app/api/users/name",
+          url: "https://localhost:3000/my_webapp_node/api/users/name",
           dataType:"json",
           data:{
             "name":str
@@ -733,7 +733,7 @@
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_web_app/api/users/sendRequest",
+        url: "https://localhost:3000/my_webapp_node/api/users/sendRequest",
         dataType:"json",
         data: {
             "id":id
@@ -760,7 +760,7 @@ console.log(notmyid);
 $.ajax({
     async: true,
     type: "POST",
-    url: "https://localhost:3000/my_web_app/api/users/checkFollower",
+    url: "https://localhost:3000/my_webapp_node/api/users/checkFollower",
     dataType:"json",
     data: {
         "id":notmyid,
@@ -798,7 +798,7 @@ $.ajax({
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_web_app/api/users/follow",
+        url: "https://localhost:3000/my_webapp_node/api/users/follow",
         dataType:"json",
         data: {
             "id":id,
@@ -820,7 +820,7 @@ $.ajax({
     $.ajax({
         async: true,
         type: "POST",
-        url: "https://localhost:3000/my_web_app/api/users/unfollow",
+        url: "https://localhost:3000/my_webapp_node/api/users/unfollow",
         dataType:"json",
         data: {
             "id":id,
