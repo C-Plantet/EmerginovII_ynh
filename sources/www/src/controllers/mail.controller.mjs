@@ -16,7 +16,7 @@ export async function sendEmail(req,res){
       host:'smtp.gmail.com',
       secure:true,
       port:465,
-      proxy: 'http://localhost:8000/',
+      proxy: 'http://localhost:3000/',
       auth: {
           user: '',
           pass: ''
