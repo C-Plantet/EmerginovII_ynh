@@ -2411,7 +2411,7 @@ function checkPageFocus() {
   }
 }
 
-      var socket = io.connect('http://localhost:3000/');
+      var socket = io.connect('http://localhost:3000/my_webapp_node/');
       socket.on('message', function(message) {
               console.log(message);
               message.value=message.value.replace("<p>"," ");
