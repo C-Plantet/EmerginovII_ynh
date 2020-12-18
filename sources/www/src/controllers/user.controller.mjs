@@ -64,7 +64,7 @@ export async function createUser(req, res){
     console.log(error);
     res.status(500).json({
       message: 'something went wrong',
-      data:{}
+      data:{name,login,email,gittoken,gitusername,job,location,school,password,mastodon}
     });
   }
 }
