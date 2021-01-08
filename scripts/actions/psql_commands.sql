@@ -1,6 +1,6 @@
 CREATE DATABASE db_emerginov_test;
 CREATE USER test_user WITH ENCRYPTED PASSWORD 'azerty';
-GRANT ALL PRIVILEGES ON DATABASE db_emerginov TO test_user;
+GRANT ALL PRIVILEGES ON DATABASE db_emerginov_test TO test_user;
 
 CREATE TABLE IF NOT EXISTS projects (
   id INTEGER PRIMARY KEY,
