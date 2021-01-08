@@ -35,9 +35,6 @@ export async function createUser(req, res){
   var picture=null;
   try{
 
-    await op.authenticate();
-    console.log('Connection has been established successfully.');
-
     let newUser= await Users.create({
       id,
       name,
