@@ -35,7 +35,7 @@ export async function createUser(req, res){
   var picture=null;
   try{
 
-    await sequelize.authenticate();
+    await op.authenticate();
     console.log('Connection has been established successfully.');
 
     let newUser= await Users.create({
@@ -65,8 +65,6 @@ export async function createUser(req, res){
       }
 
   }catch(error){
-    console.error('Unable to connect to the database:', error);
-
     console.log(error);
     res.status(500).json({
       message: error
