@@ -81,6 +81,8 @@ ynh_use_nodejs
 
 ynh_script_progression --message="Creating Postgresql database..."
 
+ynh_psql_setup_db --db_user="test_user" --db_name="db_emerginov_test" --db_pwd="azerty"
+
 ynh_psql_execute_file_as_root --file="./actions/psql_commands.sql"
 
 #=================================================

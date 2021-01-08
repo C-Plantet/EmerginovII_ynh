@@ -1,4 +1,3 @@
-CREATE DATABASE db_emerginov_test;
 CREATE USER test_user WITH ENCRYPTED PASSWORD 'azerty';
 GRANT ALL PRIVILEGES ON DATABASE db_emerginov_test TO test_user;
 
