@@ -37,7 +37,7 @@ ynh_remove_systemd_config
 ynh_script_progression --message="Removing the POSTGRESQL database..." --weight=2
 
 # Remove a database along with the associated user
-ynh_psql_remove_db --db_user="test_user" --db_name="db_emerginov"
+ynh_psql_remove_db --db_user="test_user" --db_name="db_emerginov_test"
 
 
 #=================================================
