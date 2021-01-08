@@ -34,7 +34,6 @@ export async function createUser(req, res){
   var listoffollow=null;
   var picture=null;
   try{
-
     let newUser= await Users.create({
       id,
       name,
@@ -62,7 +61,6 @@ export async function createUser(req, res){
       }
 
   }catch(error){
-    console.log(error);
     res.status(500).json({
       message: error
     });
