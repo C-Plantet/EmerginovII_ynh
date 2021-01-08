@@ -1,3 +1,5 @@
+GRANT ALL PRIVILEGES ON DATABASE db_emerginov TO test_user;
+
 CREATE TABLE IF NOT EXISTS projects (
   id INTEGER PRIMARY KEY,
   name text NOT NULL CHECK (name <> ''),
