@@ -81,7 +81,9 @@ ynh_use_nodejs
 
 ynh_script_progression --message="Creating Postgresql database..."
 
-ynh_psql_execute_file_as_root --file="./actions/psql_commands.sql"
+ynh_psql_setup_db --db_user="test_user" --db_name="db_emerginov_test" --db_pwd="azerty"
+
+ynh_psql_execute_file_as_root --file="./actions/psql_commands.sql" --database=$db_name
 
 #=================================================
 # NGINX CONFIGURATION
@@ -129,12 +131,6 @@ ynh_replace_string --match_string="__DOMAIN_URI__" --replace_string="$domain$pat
 ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="$config_file"
 ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="$config_file"
 
-# Store the database access
-echo -e "# MySQL Database
-name: ${db_name}\nuser: ${db_name}\npass: ${db_pwd}" > ../sources/db_access.txt
-
-# Copy files to the right place
-cp -r "../sources/db_access.txt" "$final_path/db_access.txt"
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM
