@@ -64,7 +64,7 @@ export async function createUser(req, res){
     console.log(error);
     res.status(500).json({
       message: 'something went wrong',
-      data:{name,login,email,gittoken,gitusername,job,location,school,password,mastodon}
+      data:{}
     });
   }
 }
@@ -113,7 +113,6 @@ export async function getUsers(req,res){
         //   }
         // };
         if (!fs.existsSync(user.currentproject.name)) {
-          console.log("helloo");
         //fs.mkdirSync(user.currentproject.name);
 
         simpleGit.clone(url, localPath)
