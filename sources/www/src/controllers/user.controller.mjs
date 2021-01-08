@@ -62,7 +62,7 @@ export async function createUser(req, res){
 
   }catch(error){
     res.status(500).json({
-      message: error //on display les erreurs 
+      message: error
     });
   }
 }

@@ -29,6 +29,10 @@ domain=$YNH_APP_ARG_DOMAIN
 path_url="/my_webapp_node"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
+db_name="db_emerginov"
+db_user="test_user"
+db_pwd="azerty"
+
 app=$YNH_APP_INSTANCE_NAME
 app_nb=$YNH_APP_INSTANCE_NUMBER
 
@@ -81,7 +85,9 @@ ynh_use_nodejs
 
 ynh_script_progression --message="Creating Postgresql database..."
 
-ynh_psql_execute_file_as_root --file="./actions/psql_commands.sql"
+ynh_psql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
+
+ynh_psql_execute_file_as_root --file="./actions/psql_commands.sql" --database=$db_name
 
 #=================================================
 # NGINX CONFIGURATION
