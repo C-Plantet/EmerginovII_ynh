@@ -1,5 +1,3 @@
-
-CREATE USER test_user WITH ENCRYPTED PASSWORD 'azerty';
 GRANT ALL PRIVILEGES ON DATABASE db_emerginov TO test_user;
 
 CREATE TABLE IF NOT EXISTS projects (
