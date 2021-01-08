@@ -31,7 +31,7 @@ is_public=$YNH_APP_ARG_IS_PUBLIC
 
 db_name=$YNH_APP_ARG_DB_NAME
 db_user=$YNH_APP_ARG_DB_USER
-de_pwd="azerty"
+db_pwd="azerty"
 
 app=$YNH_APP_INSTANCE_NAME
 app_nb=$YNH_APP_INSTANCE_NUMBER
