@@ -34,6 +34,10 @@ export async function createUser(req, res){
   var listoffollow=null;
   var picture=null;
   try{
+
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+
     let newUser= await Users.create({
       id,
       name,
@@ -61,10 +65,11 @@ export async function createUser(req, res){
       }
 
   }catch(error){
+    console.error('Unable to connect to the database:', error);
+
     console.log(error);
     res.status(500).json({
-      message: error,
-      data:{}
+      message: error
     });
   }
 }

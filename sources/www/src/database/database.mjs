@@ -11,7 +11,7 @@ export const sequelize=new Sequelize(
   // 'lpjibasl',
   // '6o5Zh4iXTCgAdrpg9SGsRoYlM70c0X3o',
   {
-     host:"2.10.137.228",
+     host:"localhost",
     // host: 'localhost',
     dialect:'postgres',
     pool:{
