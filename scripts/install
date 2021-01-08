@@ -29,8 +29,8 @@ domain=$YNH_APP_ARG_DOMAIN
 path_url="/my_webapp_node"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
-db_name=$YNH_APP_ARG_DB_NAME
-db_user=$YNH_APP_ARG_DB_USER
+db_name="db_emerginov"
+db_user="test_user"
 db_pwd="azerty"
 
 app=$YNH_APP_INSTANCE_NAME
@@ -55,9 +55,6 @@ ynh_script_progression --message="Storing installation settings..."
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
-
-ynh_app_setting_set --app=$app --key=db_name --value=$db_name
-ynh_app_setting_set --app=$app --key=db_user --value=$db_user
 
 ynh_app_setting_set --app=$app --key=overwrite_nginx --value=0
 ynh_app_setting_set --app=$app --key=overwrite_phpfpm --value=1
