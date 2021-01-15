@@ -23,7 +23,7 @@ app=${YNH_APP_INSTANCE_NAME:-$YNH_APP_ID}
 ynh_script_progression --message="Removing the database..." --weight=9
 
 db_name=$(ynh_app_setting_get  --app=$app --key=db_name)
-ynh_psql_remove_db --db_user=$db_name --db_name=$db_name
+ynh_psql_remove_db --db_user=$db_user --db_name=$db_name
 
 
 #=================================================
