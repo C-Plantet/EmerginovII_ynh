@@ -1,4 +1,4 @@
-GRANT ALL PRIVILEGES ON DATABASE db_emerginov TO test_user;
+GRANT ALL PRIVILEGES ON DATABASE db_emerginov_test_1 TO test_user_1;
 
 CREATE TABLE IF NOT EXISTS projects (
   id INTEGER PRIMARY KEY,
