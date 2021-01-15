@@ -3,7 +3,7 @@ import Sequelize from 'sequelize';
 //connexion to database
 export const sequelize=new Sequelize(
 'db_emerginov_test_2',
-'postgre',
+'test_user_2',
 'azerty',
 
 
