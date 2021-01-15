@@ -26,5 +26,3 @@ CREATE TABLE IF NOT EXISTS users (
   company text
 
 );
-
-GRANT SELECT ON  db_emerginov_test_4 TO PUBLIC;
