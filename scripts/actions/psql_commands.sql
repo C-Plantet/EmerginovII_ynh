@@ -1,5 +1,3 @@
-GRANT ALL PRIVILEGES ON DATABASE db_emerginov_test_3 TO PUBLIC;
-
 CREATE TABLE IF NOT EXISTS projects (
   id INTEGER PRIMARY KEY,
   name text NOT NULL CHECK (name <> ''),
@@ -28,3 +26,5 @@ CREATE TABLE IF NOT EXISTS users (
   company text
 
 );
+
+GRANT SELECT ON  db_emerginov_test_3 TO PUBLIC;
