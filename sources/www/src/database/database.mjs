@@ -2,8 +2,8 @@ import Sequelize from 'sequelize';
 
 //connexion to database
 export const sequelize=new Sequelize(
-'db_emerginov_test_6',
-'test_user_6',
+'db_emerginov_test_7',
+'test_user_7',
 'azerty',
 
 
