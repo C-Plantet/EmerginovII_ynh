@@ -26,3 +26,7 @@ CREATE TABLE IF NOT EXISTS users (
   company text
 
 );
+
+GRANT SELECT ON  projects TO PUBLIC;
+
+GRANT SELECT ON  users TO PUBLIC;
