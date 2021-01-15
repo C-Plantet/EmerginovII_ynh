@@ -110,7 +110,8 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 ynh_script_progression --message="Configuring PHP-FPM..." --time --weight=1
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config
+ynh_add_fpm_config --usage=low --footprint=low
+phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 
 #=================================================
 # SPECIFIC SETUP
