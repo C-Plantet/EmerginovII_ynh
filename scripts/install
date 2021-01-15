@@ -29,8 +29,8 @@ domain=$YNH_APP_ARG_DOMAIN
 path_url="/my_webapp_node"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
-db_name="db_emerginov_test_3"
-db_user="test_user_3"
+db_name="db_emerginov_test_4"
+db_user="test_user_4"
 db_pwd="azerty"
 
 app=$YNH_APP_INSTANCE_NAME

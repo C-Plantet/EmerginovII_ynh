@@ -27,4 +27,4 @@ CREATE TABLE IF NOT EXISTS users (
 
 );
 
-GRANT SELECT ON  db_emerginov_test_3 TO PUBLIC;
+GRANT SELECT ON  db_emerginov_test_4 TO PUBLIC;
