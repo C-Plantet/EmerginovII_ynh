@@ -110,8 +110,7 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 ynh_script_progression --message="Configuring PHP-FPM..." --time --weight=1
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config --usage=low --footprint=low
-phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
+ynh_add_fpm_config
 
 #=================================================
 # SPECIFIC SETUP
@@ -144,7 +143,7 @@ ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_f
 ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="$config_file"
 
 # Store the database access
-echo -e "# MySQL Database
+echo -e "# Database
 name: ${db_name}\nuser: ${db_name}\npass: ${db_pwd}" > ../sources/db_access.txt
 
 # Copy files to the right place
