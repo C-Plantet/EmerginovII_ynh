@@ -532,12 +532,13 @@ Emerginov Editor
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            New Project 
+            New Project
           </a>
           <div style="  background-color: #505050;"  class="dropdown-menu" aria-labelledby="navbarDropdown">
-
+          <form method= "POST" action="/my_webapp_node/api/projects">
           <input id="NewProjectName" class="form-control mr-sm-2" type="text" placeholder="    Project Name" >
           <button style="margin-top: 5px;margin-left:40px;" id="createProject" type="submit" class="btn btn-secondary">create</button>
+          </form>
           </div>
 
         </li>
