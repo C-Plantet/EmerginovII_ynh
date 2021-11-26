@@ -30,7 +30,7 @@ export async function createProject(req, res){
     console.log(error);
     res.status(500).json({
       message: 'something went wrong',
-      data:{}
+      data:req.body
     });
   }
 
