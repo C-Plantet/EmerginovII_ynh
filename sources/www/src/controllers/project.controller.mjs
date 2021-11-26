@@ -10,7 +10,10 @@ var fs = require('fs');
 var rimraf = require("rimraf");
 
 export async function createProject(req, res){
-  const { name,priority,description,deliverydate}= req.body;
+  const { name}= req.body;
+  const priority = 0;
+  const description = 'test'; 
+  const deliverydate = Date.now();
   try{
     let newProject= await Project.create({
       name,
