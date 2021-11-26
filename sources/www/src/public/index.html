@@ -2481,7 +2481,7 @@ function checkPageFocus() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "/my_webapp_node/pi/users/verifyCommit",
+        url: "/my_webapp_node/api/users/verifyCommit",
         dataType:"json",
         data:{
           "id":sessionStorage.getItem("userID")
