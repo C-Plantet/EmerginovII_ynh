@@ -10,13 +10,13 @@ var fs = require('fs');
 var rimraf = require("rimraf");
 
 export async function createProject(req, res){
-  const { name}= req.body;
+  const { name,priority,description,deliverydate}= req.body;
   try{
     let newProject= await Project.create({
       name,
-      priority = 1,
-      description = "test",
-      deliverydate = Date.now()
+      priority,
+      description,
+      deliverydate
     },{
       fields:['name','priority','description','deliverydate']
     });
