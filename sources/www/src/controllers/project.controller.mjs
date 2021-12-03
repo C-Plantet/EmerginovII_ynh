@@ -11,9 +11,6 @@ var rimraf = require("rimraf");
 
 export async function createProject(req, res){
   const { name,priority,description,deliverydate}= req.body;
-  priority = 1;
-  description = "ceci est un test"
-  deliverydate = Date.now()
   
   try{
     let newProject= await Project.create({
@@ -35,8 +32,7 @@ export async function createProject(req, res){
     
     res.status(500).json({
       message: 'something went wrong',
-      data:req.body,
-      variable : name,priority,description,deliverydate
+      data:req.body
     });
   }
 }
