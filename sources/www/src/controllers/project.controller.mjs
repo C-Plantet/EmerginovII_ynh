@@ -4,13 +4,16 @@ const require = createRequire(import.meta.url);
 
 import Project from '../models/Project.mjs';
 import Users from '../models/Users.mjs';
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 var newRequests=[]
 var fs = require('fs');
 var rimraf = require("rimraf");
 
 export async function createProject(req, res){
   const { name,priority,description,deliverydate}= req.body;
+  priority = 1;
+  description = "ceci est un test"
+  deliverydate = Date.now()
   
   try{
     let newProject= await Project.create({
@@ -35,10 +38,6 @@ export async function createProject(req, res){
       variable : name,priority,description,deliverydate
     });
   }
-
-
-
-  //console.log(req,body);
 }
 
 export async function getProjects(req,res){
