@@ -25,6 +25,7 @@ export async function createProject(req, res){
       fields:['name','priority','description','deliverydate']
     });
     if(newProject){
+      console.log("success")
       return res.json({
         message:'Project created successfully',
         data:newProject
