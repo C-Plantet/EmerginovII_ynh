@@ -28,18 +28,11 @@ export async function createProject(req, res){
       });
     }
   }catch(error){
-    console.log(error);
-    console.log('name : ')
-    console.log(name)
-    console.log('priority : ')
-    console.log(priority)
-    console.log('description : ')
-    console.log(description)
-    console.log('deliverydate : ')
-    console.log(deliverydate)
+    
     res.status(500).json({
       message: 'something went wrong',
-      data:req.body
+      data:req.body,
+      variable : name,priority,description,deliverydate
     });
   }
 
