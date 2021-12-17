@@ -10,25 +10,27 @@ var fs = require('fs');
 var rimraf = require("rimraf");
 
 export async function createProject(req, res){
-  const { name,priority,description,deliverydate}= req.body;
+  const {name,priority,description,deliverydate}= req.body;
   
   try{
-    let newProject= await Project.create({
+    Project.create({
       name,
       priority,
       description,
       deliverydate
     },{
       fields:['name','priority','description','deliverydate']
-    });
-    if(newProject){
-      console.log("success")
-      return res.json({
-        message:'Project created successfully',
-        data:newProject
-      });
+    }).then(newProject => {
+      if(newProject){
+        console.log("success")
+        return res.json({
+          message:'Project created successfully',
+          data:newProject
+        });
+      }
+    })
     }
-  }catch(error){
+  catch(error){
     
     res.status(500).json({
       message: 'something went wrong',
