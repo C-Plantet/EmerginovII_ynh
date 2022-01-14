@@ -11,7 +11,7 @@ var rimraf = require("rimraf");
 
 export async function createProject(req, res){
   const {name,priority,description,deliverydate}= req.body;
-  
+  alert("initiating creation");
   try{
     Project.create({
       name,
@@ -23,6 +23,7 @@ export async function createProject(req, res){
     }).then(newProject => {
       if(newProject){
         console.log("success")
+        alert("success");
         return res.json({
           message:'Project created successfully',
           data:newProject
