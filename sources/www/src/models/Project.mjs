@@ -11,10 +11,12 @@ const Project= sequelize.define('projects',{
     type: Sequelize.TEXT
   },
   priority:{
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue : 1
   },
   description:{
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    defaultValue : ''
   },
   deliverydate:{
     type: Sequelize.DATE
